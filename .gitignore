@@ -1,0 +1,36 @@
+.env
+
+# Gradle files
+.gradle/
+build/
+reports/
+
+*.log
+*.dm
+
+# kotlin files
+.kotlin
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Android Studio generated files and folders
+captures/
+.externalNativeBuild/
+.cxx/
+output.json
+
+# Built application files
+*.apk
+*.aar
+*.ap_
+*.aab
+
+# IntelliJ
+*.iml
+.idea/
+misc.xml
+deploymentTargetDropDown.xml
+render.experimental.xml
+/captures
+.externalNativeBuild

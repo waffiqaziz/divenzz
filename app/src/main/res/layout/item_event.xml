@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  android:padding="@dimen/margin">
+
+  <com.google.android.material.imageview.ShapeableImageView
+    android:id="@+id/iv_picture"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:maxHeight="200dp"
+    android:contentDescription="@string/event_picture"
+    app:layout_constraintBottom_toBottomOf="@+id/bg_item"
+    android:adjustViewBounds="true"
+    android:scaleType="centerCrop"
+    app:layout_constraintStart_toStartOf="parent"
+    app:shapeAppearanceOverlay="@style/roundedCornersImageView"
+    tools:layout_height="175dp"
+    tools:src="@color/cardview_dark_background" />
+
+
+  <TextView
+    android:id="@+id/tv_event_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/short_margin"
+    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+    tools:text="Dicoding Event 1" />
+
+</LinearLayout>
