@@ -2,18 +2,11 @@ package com.waffiq.divenzz
 
 import android.graphics.Color
 import android.os.Bundle
-import android.view.ViewGroup
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updateLayoutParams
-import androidx.core.view.updatePadding
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.color.MaterialColors
 import com.waffiq.divenzz.R.id.nav_host_fragment_activity_main
 import com.waffiq.divenzz.databinding.ActivityMainBinding
 

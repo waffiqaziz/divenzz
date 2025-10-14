@@ -1,4 +1,4 @@
-package com.waffiq.divenzz.ui.home
+package com.waffiq.divenzz.ui.past
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -11,7 +11,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeViewModel : ViewModel() {
+class PastEventViewModel : ViewModel() {
 
   private val _events = MutableLiveData<List<EventsItem>>()
   val events: LiveData<List<EventsItem>> = _events
@@ -23,12 +23,12 @@ class HomeViewModel : ViewModel() {
   val snackBarText: LiveData<String> = _snackBarText
 
   init {
-    getAllEvent()
+    getPastEvent()
   }
 
-  fun getAllEvent() {
+  fun getPastEvent() {
     _isLoading.value = true
-    val client = EventApiConfig.getApiService().getAllEvent()
+    val client = EventApiConfig.Companion.getApiService().getAllEvent(0)
     client.enqueue(object : Callback<EventResponse> {
       override fun onResponse(
         call: Call<EventResponse>,
