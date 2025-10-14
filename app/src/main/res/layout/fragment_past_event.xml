@@ -20,31 +20,31 @@
       android:id="@+id/toolbar"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:minHeight="?attr/actionBarSize"
       android:background="?attr/colorSurface"
       android:elevation="4dp"
+      android:minHeight="?attr/actionBarSize"
       android:outlineProvider="background"
       android:paddingHorizontal="16dp"
       android:theme="@style/ThemeOverlay.Material3.Toolbar.Surface"
       app:contentInsetStartWithNavigation="0dp"
-      app:navigationIconTint="?attr/colorOnSurface"
-      app:layout_scrollFlags="scroll|enterAlways">
+      app:layout_scrollFlags="scroll|enterAlways"
+      app:navigationIconTint="?attr/colorOnSurface">
 
       <!-- Custom content inside Toolbar -->
       <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="start|center_vertical">
+        android:gravity="start|center_vertical"
+        android:orientation="vertical">
 
         <TextView
           android:id="@+id/titleText"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:fontFamily="@font/nunito_sans_regular"
           android:text="@string/dicoding_event"
           android:textAppearance="@style/ToolbarTitleText"
-          android:textColor="?attr/colorOnSurface"
-          android:fontFamily="@font/nunito_sans_regular" />
+          android:textColor="?attr/colorOnSurface" />
 
         <TextView
           android:id="@+id/subtitleText"
@@ -66,5 +66,13 @@
     android:scrollbars="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:listitem="@layout/item_event" />
+
+  <include
+    android:id="@+id/loading"
+    layout="@layout/progress_circular" />
+
+  <include
+    android:id="@+id/error"
+    layout="@layout/error_view" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

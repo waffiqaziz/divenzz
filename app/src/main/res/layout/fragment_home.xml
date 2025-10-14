@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".ui.home.HomeFragment">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/short_margin">
+
+    <TextView
+      android:id="@+id/tv_upcoming_events"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/short_margin"
+      android:layout_marginTop="@dimen/margin"
+      android:fontFamily="@font/nunito_sans_bold"
+      android:text="@string/upcoming_events"
+      android:textAppearance="@style/TextAppearance.Material3.TitleLarge" />
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/rv_events_horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/short_margin"
+      android:clipToPadding="false"
+      android:maxHeight="200dp"
+      android:orientation="horizontal"
+      android:scrollbars="horizontal"
+      tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      tools:layout_height="245dp"
+      tools:listitem="@layout/item_event" />
+
+    <TextView
+      android:id="@+id/tv_past_events"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/short_margin"
+      android:layout_marginTop="@dimen/margin"
+      android:fontFamily="@font/nunito_sans_bold"
+      android:text="@string/past_events"
+      android:textAppearance="@style/TextAppearance.Material3.TitleLarge" />
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/rv_events_vertical"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/short_margin"
+      android:clipToPadding="false"
+      android:paddingBottom="140dp"
+      android:scrollbars="vertical"
+      tools:listitem="@layout/item_small_event" />
+
+  </LinearLayout>
+
+  <include
+    android:id="@+id/loading"
+    layout="@layout/progress_circular" />
+
+  <include
+    android:id="@+id/error"
+    layout="@layout/error_view" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

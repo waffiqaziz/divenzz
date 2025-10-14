@@ -28,6 +28,8 @@ class PastEventViewModel : ViewModel() {
 
   fun getPastEvent() {
     _isLoading.value = true
+    _snackBarText.value = ""
+
     val client = EventApiConfig.Companion.getApiService().getAllEvent(0)
     client.enqueue(object : Callback<EventResponse> {
       override fun onResponse(
@@ -45,7 +47,7 @@ class PastEventViewModel : ViewModel() {
           }
         } else {
           Log.e(TAG, "onFailure: ${response.message()}")
-          _snackBarText.value = FAILED
+          _snackBarText.value = response.message() ?: FAILED
         }
       }
 
