@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,6 +32,7 @@ class PastEventFragment : Fragment() {
 
     setupRecyclerView()
     getNotes()
+    btnAction()
 
     return root
   }
@@ -47,8 +49,32 @@ class PastEventFragment : Fragment() {
   }
 
   private fun getNotes() {
+    // observe loading states
+    viewModel.isLoading.observe(viewLifecycleOwner) {
+      binding.loading.progressCircular.isVisible = it
+    }
+
+    // observe error states
+    viewModel.snackBarText.observe(viewLifecycleOwner) {
+      if(it.isNotEmpty()){
+        binding.error.root.isVisible = true
+        binding.rvEvents.isVisible = false
+      } else {
+        binding.error.root.isVisible = false
+        binding.rvEvents.isVisible = true
+      }
+      binding.error.tvErrorMessage.text = it
+    }
+
+    // observe data
     viewModel.events.observe(viewLifecycleOwner) {
       eventAdapter.setEvent(it)
+    }
+  }
+
+  private fun btnAction(){
+    binding.error.btnTryAgain.setOnClickListener {
+      viewModel.getPastEvent()
     }
   }
 

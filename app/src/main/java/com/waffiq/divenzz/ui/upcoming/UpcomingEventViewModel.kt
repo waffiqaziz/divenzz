@@ -27,7 +27,9 @@ class UpcomingEventViewModel : ViewModel() {
   }
 
   fun getUpcomingEvent() {
+    _snackBarText.value = ""
     _isLoading.value = true
+
     val client = EventApiConfig.Companion.getApiService().getAllEvent(1)
     client.enqueue(object : Callback<EventResponse> {
       override fun onResponse(
@@ -45,7 +47,7 @@ class UpcomingEventViewModel : ViewModel() {
           }
         } else {
           Log.e(TAG, "onFailure: ${response.message()}")
-          _snackBarText.value = FAILED
+          _snackBarText.value = response.message() ?: FAILED
         }
       }
 

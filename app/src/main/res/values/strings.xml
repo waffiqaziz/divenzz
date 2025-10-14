@@ -1,5 +1,6 @@
 <resources>
   <string name="app_name">Divenzz</string>
+  <string name="title_home">Home</string>
   <string name="title_upcoming">Upcoming</string>
   <string name="title_past">Past Event</string>
   <string name="title_search">Search</string>
@@ -8,4 +9,10 @@
   <string name="home_toolbar_description">Recommendation event for you</string>
   <string name="past_events_header">Past events that already happened</string>
   <string name="dicoding_event">Dicoding Event</string>
+  <string name="try_again">Try Again</string>
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="upcoming_events">Upcoming Events</string>
+  <string name="past_events">Past Events</string>
+  <string name="event_image">Event image</string>
 </resources>
