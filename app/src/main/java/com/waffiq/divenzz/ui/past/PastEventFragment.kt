@@ -1,4 +1,4 @@
-package com.waffiq.divenzz.ui.home
+package com.waffiq.divenzz.ui.past
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,15 +9,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.waffiq.divenzz.core.data.remote.response.EventsItem
-import com.waffiq.divenzz.databinding.FragmentHomeBinding
+import com.waffiq.divenzz.databinding.FragmentPastEventBinding
 import com.waffiq.divenzz.ui.adapter.EventAdapter
 
-class HomeFragment : Fragment() {
+class PastEventFragment : Fragment() {
 
-  private var _binding: FragmentHomeBinding? = null
+  private var _binding: FragmentPastEventBinding? = null
   private val binding get() = _binding!!
 
-  private val viewModel by viewModels<HomeViewModel>()
+  private val viewModel by viewModels<PastEventViewModel>()
 
   private lateinit var eventAdapter: EventAdapter
 
@@ -26,7 +26,7 @@ class HomeFragment : Fragment() {
     container: ViewGroup?,
     savedInstanceState: Bundle?,
   ): View {
-    _binding = FragmentHomeBinding.inflate(inflater, container, false)
+    _binding = FragmentPastEventBinding.inflate(inflater, container, false)
     val root: View = binding.root
 
     setupRecyclerView()
