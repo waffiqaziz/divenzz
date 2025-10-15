@@ -4,4 +4,5 @@
   <dimen name="short_margin">8dp</dimen>
   <dimen name="item_card_margin">6dp</dimen>
   <dimen name="corner_radius">8dp</dimen>
+  <dimen name="rv_padding">140dp</dimen>
 </resources>

@@ -18,4 +18,9 @@ interface EventApiService {
   fun getEventDetail(
     @Path("eventId") eventId: Int,
   ): Call<DetailEventResponse>
+
+  @GET("/events?active=-1")
+  fun search(
+    @Query("q") query: String,
+  ): Call<ListEventResponse>
 }

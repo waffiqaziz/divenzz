@@ -87,7 +87,8 @@ class HomeFragment : Fragment() {
 
     // observe data
     viewModelUpcoming.events.observe(viewLifecycleOwner) {
-      eventAdapterHorizontal.setEvent(it)
+      val item = it.take(5)
+      eventAdapterHorizontal.setEvent(item)
     }
     viewModelPast.events.observe(viewLifecycleOwner) {
       eventAdapterVertical.setEvent(it)

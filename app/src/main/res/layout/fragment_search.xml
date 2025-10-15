@@ -1,22 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   tools:context=".ui.search.SearchFragment">
 
-  <TextView
-    android:id="@+id/text_search"
+  <androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:layout_marginTop="24dp"
+      android:paddingHorizontal="@dimen/margin">
+
+      <com.google.android.material.search.SearchBar
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/search_hint"
+        app:layout_constraintTop_toTopOf="parent" />
+
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_search_results"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/rv_padding"
+        android:visibility="gone"
+        tools:listitem="@layout/item_event"
+        tools:visibility="visible" />
+
+    </LinearLayout>
+
+  </androidx.core.widget.NestedScrollView>
+
+  <com.google.android.material.search.SearchView
+    android:id="@+id/search_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:hint="@string/search_hint"
+    app:layout_anchor="@id/search_bar">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_suggestions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:padding="8dp"
+        android:paddingBottom="@dimen/rv_padding" />
+
+    </LinearLayout>
+
+  </com.google.android.material.search.SearchView>
+
+  <LinearLayout
+    android:id="@+id/search_text_container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+      android:layout_width="120dp"
+      android:layout_height="120dp"
+      android:layout_gravity="center"
+      android:alpha="0.6"
+      android:contentDescription="@string/search_image"
+      android:src="@drawable/ic_search"
+      app:tint="?attr/colorOnSurfaceVariant" />
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_marginTop="16dp"
+      android:text="@string/start_searching"
+      android:textAppearance="@style/TextAppearance.Material3.BodyLarge" />
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="@string/search_text"
+      android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+  </LinearLayout>
+
+  <include
+    android:id="@+id/error"
+    layout="@layout/error_view" />
+
+  <include
+    android:id="@+id/empty_state"
+    layout="@layout/empty_view" />
+
+  <com.google.android.material.progressindicator.LinearProgressIndicator
+    android:id="@+id/progress_indicator"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="8dp"
-    android:textAlignment="center"
-    android:textSize="20sp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    android:layout_gravity="top"
+    android:indeterminate="true"
+    android:visibility="gone"
+    app:layout_anchorGravity="bottom"
+    tools:visibility="visible" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -64,7 +64,7 @@
     android:layout_height="match_parent"
     android:clipToPadding="false"
     android:orientation="vertical"
-    android:paddingBottom="140dp"
+    android:paddingBottom="@dimen/rv_padding"
     android:scrollbars="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:listitem="@layout/item_event" />
