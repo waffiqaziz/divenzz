@@ -4,14 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.waffiq.divenzz.core.data.remote.response.EventsItem
+import com.waffiq.divenzz.core.data.remote.response.EventResponse
 import com.waffiq.divenzz.databinding.FragmentPastEventBinding
 import com.waffiq.divenzz.ui.adapter.EventAdapter
+import com.waffiq.divenzz.utils.Helpers.openDetailPage
 
 class PastEventFragment : Fragment() {
 
@@ -44,8 +44,8 @@ class PastEventFragment : Fragment() {
     binding.rvEvents.adapter = eventAdapter
   }
 
-  private fun onClick(event: EventsItem) {
-    Toast.makeText(context, event.name, Toast.LENGTH_SHORT).show()
+  private fun onClick(event: EventResponse) {
+    requireActivity().openDetailPage(event.id)
   }
 
   private fun getNotes() {
@@ -56,7 +56,7 @@ class PastEventFragment : Fragment() {
 
     // observe error states
     viewModel.snackBarText.observe(viewLifecycleOwner) {
-      if(it.isNotEmpty()){
+      if (it.isNotEmpty()) {
         binding.error.root.isVisible = true
         binding.rvEvents.isVisible = false
       } else {
@@ -72,7 +72,7 @@ class PastEventFragment : Fragment() {
     }
   }
 
-  private fun btnAction(){
+  private fun btnAction() {
     binding.error.btnTryAgain.setOnClickListener {
       viewModel.getPastEvent()
     }

@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/coordinator_layout"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:fitsSystemWindows="true"
+  tools:context=".ui.detail.DetailActivity">
+
+  <com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/app_bar_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@null"
+    android:translationZ="0.1dp">
+
+    <com.google.android.material.appbar.MaterialToolbar
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <!-- Button layout -->
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        android:orientation="horizontal">
+
+        <!-- Back button -->
+        <ImageButton
+          android:id="@+id/btn_back"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentStart="true"
+          android:layout_alignParentTop="true"
+          android:background="@drawable/bg_back_button_alpha_08"
+          android:contentDescription="@string/back"
+          android:foreground="?actionBarItemBackground"
+          android:minWidth="48dp"
+          android:minHeight="48dp"
+          android:src="@drawable/ic_left_icon" />
+      </RelativeLayout>
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/swipe_refresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+      android:id="@+id/nested_scroll_view_person"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+
+      <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content">
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.waffiq.divenzz.ui.customview.AspectRatioImageView
+          android:id="@+id/iv_picture"
+          style="@style/roundedCornersImageView"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:contentDescription="@string/event_image"
+          android:scaleType="fitCenter"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:src="@color/teal_200" />
+
+
+        <TextView
+          android:id="@+id/tv_event_name"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginHorizontal="@dimen/margin"
+          android:layout_marginTop="@dimen/margin"
+          android:fontFamily="@font/nunito_sans_bold"
+          android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+          tools:text="Dicoding Event 1" />
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+          <TextView
+            android:id="@+id/tv_owner_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin"
+            android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
+            tools:text="Dicoding Indonesia, " />
+
+          <TextView
+            android:id="@+id/tv_event_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
+            tools:text="Tech-talk" />
+        </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+          android:id="@+id/layout_detail"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/margin"
+          app:cardBackgroundColor="?attr/colorSurfaceContainer"
+          app:cardCornerRadius="12dp"
+          app:cardElevation="0dp">
+
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- First Row: Date and Time -->
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:baselineAligned="false"
+              android:orientation="horizontal">
+
+              <!-- DATE -->
+              <LinearLayout
+                style="@style/CardItemLayoutStyle"
+                android:layout_marginEnd="@dimen/margin">
+
+                <TextView
+                  style="@style/CardTitleItemStyle"
+                  android:text="@string/date" />
+
+                <TextView
+                  android:id="@+id/tv_date_day"
+                  style="@style/CardItemStyle"
+                  tools:text="Friday, Aug 17 2025" />
+              </LinearLayout>
+
+              <!-- TIME -->
+              <LinearLayout
+                style="@style/CardItemLayoutStyle">
+
+                <TextView
+                  style="@style/CardTitleItemStyle"
+                  android:text="@string/time" />
+
+                <TextView
+                  android:id="@+id/tv_time"
+                  style="@style/CardItemStyle"
+                  tools:text="6:00 - 8:00 PM" />
+              </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Spacer -->
+            <Space
+              android:layout_width="match_parent"
+              android:layout_height="20dp" />
+
+            <!-- Second Row: Location and Quota -->
+            <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:baselineAligned="false"
+              android:orientation="horizontal">
+
+              <!-- LOCATION -->
+              <LinearLayout
+                style="@style/CardItemLayoutStyle"
+                android:layout_marginEnd="@dimen/margin">
+
+                <TextView
+                  style="@style/CardTitleItemStyle"
+                  android:text="@string/location" />
+
+                <TextView
+                  android:id="@+id/tv_place"
+                  style="@style/CardItemStyle"
+                  tools:text="Online" />
+              </LinearLayout>
+
+              <!-- QUOTA -->
+              <LinearLayout
+                style="@style/CardItemLayoutStyle">
+
+                <TextView
+                  style="@style/CardTitleItemStyle"
+                  android:text="@string/quota" />
+
+                <TextView
+                  android:id="@+id/tv_quota"
+                  style="@style/CardItemStyle"
+                  tools:text="386/1000" />
+              </LinearLayout>
+
+            </LinearLayout>
+
+          </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+          android:id="@+id/tv_description"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginHorizontal="@dimen/margin"
+          android:layout_marginTop="@dimen/margin"
+          android:linksClickable="true"
+          android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+      </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+  </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/btn_open_link"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|end"
+    android:layout_margin="@dimen/margin"
+    android:contentDescription="@string/open_link"
+    app:srcCompat="@drawable/ic_link"
+    app:tint="?attr/colorOnPrimaryContainer" />
+
+  <include
+    android:id="@+id/loading"
+    layout="@layout/progress_circular" />
+
+  <include
+    android:id="@+id/error"
+    layout="@layout/error_view"
+    tools:visibility="gone" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

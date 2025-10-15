@@ -25,6 +25,7 @@ lifecycleLivedataKtx = "2.9.4"
 lifecycleViewmodelKtx = "2.9.4"
 navigationFragmentKtx = "2.9.5"
 navigationUiKtx = "2.9.5"
+swiperefreshlayout = "1.2.0-beta01"
 
 # Networking
 retrofit = "3.0.0"
@@ -33,20 +34,25 @@ okhttp = "5.2.1"
 
 # Image Loading
 glide = "5.0.5"
+activity = "1.11.0"
 
+markwon = "4.6.2"
 
 [libraries]
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
+androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
+
+junit = { group = "junit", name = "junit", version.ref = "junit" }
 
 # Networking
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
@@ -57,6 +63,11 @@ okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-i
 
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
+
+markwon-core = { module = "io.noties.markwon:core", version.ref = "markwon" }
+markwon-image-glide = { module = "io.noties.markwon:image-glide", version.ref = "markwon" }
+markwon-html = { module = "io.noties.markwon:html", version.ref = "markwon" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

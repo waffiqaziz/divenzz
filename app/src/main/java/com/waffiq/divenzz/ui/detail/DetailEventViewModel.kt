@@ -1,20 +1,20 @@
-package com.waffiq.divenzz.ui.upcoming
+package com.waffiq.divenzz.ui.detail
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.waffiq.divenzz.core.data.remote.response.DetailEventResponse
 import com.waffiq.divenzz.core.data.remote.response.EventResponse
-import com.waffiq.divenzz.core.data.remote.response.ListEventResponse
 import com.waffiq.divenzz.core.data.remote.retrofit.EventApiConfig
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UpcomingEventViewModel : ViewModel() {
+class DetailEventViewModel : ViewModel() {
 
-  private val _events = MutableLiveData<List<EventResponse>>()
-  val events: LiveData<List<EventResponse>> = _events
+  private val _event = MutableLiveData<EventResponse>()
+  val event: LiveData<EventResponse> = _event
 
   private val _isLoading = MutableLiveData<Boolean>()
   val isLoading: LiveData<Boolean> = _isLoading
@@ -22,28 +22,21 @@ class UpcomingEventViewModel : ViewModel() {
   private val _snackBarText = MutableLiveData<String>()
   val snackBarText: LiveData<String> = _snackBarText
 
-  init {
-    getUpcomingEvent()
-  }
-
-  fun getUpcomingEvent() {
-    _snackBarText.value = ""
+  fun getDetailEvent(eventId: Int) {
     _isLoading.value = true
+    _snackBarText.value = ""
 
-    val client = EventApiConfig.Companion.getApiService().getAllEvent(1)
-    client.enqueue(object : Callback<ListEventResponse> {
+    val client = EventApiConfig.Companion.getApiService().getEventDetail(eventId)
+    client.enqueue(object : Callback<DetailEventResponse> {
       override fun onResponse(
-        call: Call<ListEventResponse>,
-        response: Response<ListEventResponse>,
+        call: Call<DetailEventResponse>,
+        response: Response<DetailEventResponse>
       ) {
         _isLoading.value = false
         if (response.isSuccessful) {
           val responseBody = response.body()
-          if (responseBody != null && responseBody.listEvents != null) {
-            if (responseBody.listEvents.isEmpty()) {
-              _snackBarText.value = "No Events Found"
-            }
-            _events.value = responseBody.listEvents.filterNotNull()
+          if (responseBody != null && responseBody.event != null) {
+            _event.value = responseBody.event
           }
         } else {
           Log.e(TAG, "onFailure: ${response.message()}")
@@ -51,7 +44,7 @@ class UpcomingEventViewModel : ViewModel() {
         }
       }
 
-      override fun onFailure(call: Call<ListEventResponse>, t: Throwable) {
+      override fun onFailure(call: Call<DetailEventResponse>, t: Throwable) {
         _isLoading.value = false
         Log.e(TAG, "onFailure: ${t.message}")
         _snackBarText.value = FAILED
