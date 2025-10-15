@@ -60,7 +60,7 @@ class PastEventViewModel : ViewModel() {
   }
 
   companion object {
-    private const val TAG = "HomeViewModel"
-    private const val FAILED = "Connection Failed"
+    private const val TAG = "PastEventViewModel"
+    private const val FAILED = "Error: Check your connection and try again"
   }
 }

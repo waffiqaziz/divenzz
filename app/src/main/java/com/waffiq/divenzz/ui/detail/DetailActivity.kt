@@ -1,6 +1,5 @@
 package com.waffiq.divenzz.ui.detail
 
-import android.R.drawable.ic_menu_gallery
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -10,6 +9,8 @@ import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
+import com.waffiq.divenzz.R.drawable.ic_image_error_wide
+import com.waffiq.divenzz.R.drawable.ic_image_placeholder
 import com.waffiq.divenzz.databinding.ActivityDetailBinding
 import com.waffiq.divenzz.utils.Helpers.convertToReadableDateTimeCompat
 import io.noties.markwon.Markwon
@@ -70,6 +71,7 @@ class DetailActivity : AppCompatActivity() {
     viewModel.snackBarText.observe(this) {
       val isError = it.isNotEmpty()
       binding.container.isVisible = !isError
+      binding.btnOpenLink.isVisible = !isError
       binding.error.root.isVisible = isError
       binding.error.tvErrorMessage.text = it
     }
@@ -80,9 +82,9 @@ class DetailActivity : AppCompatActivity() {
 
         Glide.with(binding.ivPicture)
           .load(event.mediaCover)
-          .placeholder(ic_menu_gallery)
+          .placeholder(ic_image_placeholder)
           .transition(withCrossFade())
-          .error(ic_menu_gallery)
+          .error(ic_image_error_wide)
           .into(binding.ivPicture)
 
         val quota = "${event.registrants} / ${event.quota}"

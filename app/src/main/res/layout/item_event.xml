@@ -4,22 +4,20 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:background="?attr/selectableItemBackground"
+  android:foreground="?attr/selectableItemBackground"
   android:orientation="vertical"
   android:padding="@dimen/margin">
 
-  <com.google.android.material.imageview.ShapeableImageView
+  <com.waffiq.divenzz.ui.customview.AspectRatioImageView
     android:id="@+id/iv_picture"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:adjustViewBounds="true"
     android:contentDescription="@string/event_picture"
-    android:maxHeight="200dp"
-    android:scaleType="centerCrop"
+    android:scaleType="fitCenter"
     app:layout_constraintBottom_toBottomOf="@+id/bg_item"
     app:layout_constraintStart_toStartOf="parent"
     app:shapeAppearanceOverlay="@style/roundedCornersImageView"
-    tools:layout_height="175dp"
     tools:src="@color/cardview_dark_background" />
 
   <TextView

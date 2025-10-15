@@ -52,7 +52,6 @@
     android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
-      android:id="@+id/nested_scroll_view_person"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       app:layout_constraintBottom_toBottomOf="parent"
@@ -82,8 +81,7 @@
           android:scaleType="fitCenter"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
-          tools:src="@color/teal_200" />
-
+          tools:src="@color/material_dynamic_primary60" />
 
         <TextView
           android:id="@+id/tv_event_name"
@@ -120,6 +118,7 @@
           android:id="@+id/layout_detail"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          android:layout_marginHorizontal="@dimen/margin"
           android:layout_marginTop="@dimen/margin"
           app:cardBackgroundColor="?attr/colorSurfaceContainer"
           app:cardCornerRadius="12dp"
@@ -155,8 +154,7 @@
               </LinearLayout>
 
               <!-- TIME -->
-              <LinearLayout
-                style="@style/CardItemLayoutStyle">
+              <LinearLayout style="@style/CardItemLayoutStyle">
 
                 <TextView
                   style="@style/CardTitleItemStyle"
@@ -198,8 +196,7 @@
               </LinearLayout>
 
               <!-- QUOTA -->
-              <LinearLayout
-                style="@style/CardItemLayoutStyle">
+              <LinearLayout style="@style/CardItemLayoutStyle">
 
                 <TextView
                   style="@style/CardTitleItemStyle"
@@ -230,7 +227,6 @@
     </androidx.core.widget.NestedScrollView>
   </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-
   <com.google.android.material.floatingactionbutton.FloatingActionButton
     android:id="@+id/btn_open_link"
     android:layout_width="wrap_content"
@@ -238,6 +234,7 @@
     android:layout_gravity="bottom|end"
     android:layout_margin="@dimen/margin"
     android:contentDescription="@string/open_link"
+    app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
     app:srcCompat="@drawable/ic_link"
     app:tint="?attr/colorOnPrimaryContainer" />
 

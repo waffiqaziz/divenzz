@@ -1,7 +1,5 @@
 package com.waffiq.divenzz.ui.adapter
 
-import android.R.drawable.ic_menu_gallery
-import android.R.drawable.stat_notify_error
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -9,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
+import com.waffiq.divenzz.R.drawable.ic_image_broken
+import com.waffiq.divenzz.R.drawable.ic_image_placeholder
 import com.waffiq.divenzz.core.data.remote.response.EventResponse
 import com.waffiq.divenzz.databinding.ItemSmallEventBinding
 
@@ -39,9 +39,9 @@ class SmallEventAdapter(
 
     fun onBind(event: EventResponse) {
       Glide.with(binding.root.context)
-        .load(event.mediaCover)
-        .placeholder(ic_menu_gallery)
-        .error(stat_notify_error)
+        .load(event.imageLogo)
+        .placeholder(ic_image_placeholder)
+        .error(ic_image_broken)
         .transform(CenterCrop())
         .transition(withCrossFade())
         .into(binding.ivEventImage)
