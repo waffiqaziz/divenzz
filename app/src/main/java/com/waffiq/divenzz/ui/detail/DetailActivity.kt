@@ -31,6 +31,10 @@ class DetailActivity : AppCompatActivity() {
     binding = ActivityDetailBinding.inflate(layoutInflater)
     setContentView(binding.root)
 
+    binding.btnBack.setOnClickListener {
+      onBackPressedDispatcher.onBackPressed()
+    }
+
     if (getDataExtra()) {
       getDetailEvent(eventId)
 
@@ -111,6 +115,11 @@ class DetailActivity : AppCompatActivity() {
         }
       }
     }
+  }
+
+  override fun onSupportNavigateUp(): Boolean {
+    onBackPressedDispatcher.onBackPressed()
+    return true
   }
 
   companion object {
