@@ -9,17 +9,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
-import com.waffiq.divenzz.core.data.remote.response.EventsItem
+import com.waffiq.divenzz.core.data.remote.response.EventResponse
 import com.waffiq.divenzz.databinding.ItemEventBinding
 
 class EventAdapter(
-  private val onClick: (EventsItem) -> Unit,
+  private val onClick: (EventResponse) -> Unit,
 ) : RecyclerView.Adapter<EventAdapter.ViewHolder>() {
 
-  private val listEvent = ArrayList<EventsItem>()
+  private val listEvent = ArrayList<EventResponse>()
   private lateinit var binding: ItemEventBinding
 
-  fun setEvent(eventItem: List<EventsItem>) {
+  fun setEvent(eventItem: List<EventResponse>) {
     val diffCallback = DiffCallback(this.listEvent, eventItem)
     val diffResult = DiffUtil.calculateDiff(diffCallback)
 
@@ -36,7 +36,7 @@ class EventAdapter(
   inner class ViewHolder(private var binding: ItemEventBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun onBind(event: EventsItem) {
+    fun onBind(event: EventResponse) {
       Glide.with(binding.root.context)
         .load(event.mediaCover)
         .placeholder(ic_menu_gallery)
@@ -59,8 +59,8 @@ class EventAdapter(
   override fun getItemCount() = listEvent.size
 
   inner class DiffCallback(
-    private val oldList: List<EventsItem>,
-    private val newList: List<EventsItem>,
+    private val oldList: List<EventResponse>,
+    private val newList: List<EventResponse>,
   ) : DiffUtil.Callback() {
 
     override fun getOldListSize() = oldList.size

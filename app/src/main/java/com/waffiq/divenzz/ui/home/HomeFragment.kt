@@ -1,22 +1,21 @@
 package com.waffiq.divenzz.ui.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
-import com.waffiq.divenzz.core.data.remote.response.EventsItem
+import com.waffiq.divenzz.core.data.remote.response.EventResponse
 import com.waffiq.divenzz.databinding.FragmentHomeBinding
 import com.waffiq.divenzz.ui.adapter.EventAdapter
 import com.waffiq.divenzz.ui.adapter.SmallEventAdapter
 import com.waffiq.divenzz.ui.past.PastEventViewModel
 import com.waffiq.divenzz.ui.upcoming.UpcomingEventViewModel
-import kotlin.getValue
+import com.waffiq.divenzz.utils.Helpers.openDetailPage
 
 class HomeFragment : Fragment() {
 
@@ -58,8 +57,8 @@ class HomeFragment : Fragment() {
     binding.rvEventsHorizontal.adapter = eventAdapterHorizontal
   }
 
-  private fun onClick(event: EventsItem) {
-    Toast.makeText(context, event.name, Toast.LENGTH_SHORT).show()
+  private fun onClick(event: EventResponse) {
+    requireActivity().openDetailPage(event.id)
   }
 
   private fun getNotes() {

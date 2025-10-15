@@ -25,4 +25,30 @@
     <item name="android:fontFamily">@font/nunito_sans_bold</item>
     <item name="android:textAppearance">@style/TextAppearance.Material3.TitleLarge</item>
   </style>
+
+  <style name="CardTitleItemStyle">
+    <item name="android:letterSpacing">0.08</item>
+    <item name="android:textAllCaps">true</item>
+    <item name="android:fontFamily">@font/nunito_sans_bold</item>
+    <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:textAppearance">@style/TextAppearance.Material3.BodySmall</item>
+  </style>
+
+  <style name="CardItemStyle">
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_marginTop">@dimen/item_card_margin</item>
+    <item name="android:textAppearance">@style/TextAppearance.Material3.LabelSmall</item>
+  </style>
+
+  <style name="CardItemLayoutStyle">
+    <item name="android:layout_weight">1</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_width">0dp</item>
+    <item name="android:orientation">vertical</item>
+  </style>
+
+
 </resources>
