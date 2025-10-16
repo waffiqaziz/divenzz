@@ -88,5 +88,24 @@
     <item name="android:orientation">vertical</item>
   </style>
 
+  <style name="ToolbarStyle" parent="ThemeOverlay.Material3.Toolbar.Surface">
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:paddingTop">@dimen/padding_top_bar</item>
+    <item name="android:paddingBottom">@dimen/short_margin</item>
+    <item name="android:background">?attr/colorSurface</item>
+    <item name="android:elevation">@dimen/short_margin</item>
+    <item name="android:outlineProvider">background</item>
+  </style>
+
+  <style name="DefaultRecycleViewStyle">
+    <item name="android:layout_height">match_parent</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_marginStart">@dimen/item_card_margin</item>
+    <item name="android:layout_marginEnd">@dimen/item_card_margin</item>
+    <item name="android:clipToPadding">false</item>
+    <item name="android:scrollbars">vertical</item>
+    <item name="android:outlineProvider">background</item>
+  </style>
 
 </resources>

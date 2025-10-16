@@ -25,4 +25,5 @@
   <string name="search_image">Search image</string>
   <string name="no_results_found">No results found</string>
   <string name="try_different_keywords">Try different keywords</string>
+  <string name="quota_left">%1$d / %2$d (%3$d left)</string>
 </resources>

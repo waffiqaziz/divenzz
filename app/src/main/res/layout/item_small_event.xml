@@ -16,14 +16,42 @@
     app:shapeAppearanceOverlay="@style/roundedCornersImageView"
     tools:src="@color/cardview_dark_background" />
 
-  <TextView
-    android:id="@+id/tv_event_name"
+  <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/short_margin"
-    android:ellipsize="end"
-    android:maxLines="3"
-    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-    tools:text="Dicoding Event 1" />
+    android:orientation="vertical">
+
+    <TextView
+      android:id="@+id/tv_event_name"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/short_margin"
+      android:ellipsize="end"
+      android:maxLines="3"
+      android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+      tools:text="Dicoding Event 1" />
+
+    <TextView
+      android:id="@+id/tv_date_day"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/short_margin"
+      android:layout_marginTop="@dimen/tiny_margin"
+      android:ellipsize="end"
+      android:maxLines="3"
+      android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
+      tools:text="Sunday, Oct 11 2025" />
+
+    <TextView
+      android:id="@+id/tv_location"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/short_margin"
+      android:layout_marginTop="2dp"
+      android:ellipsize="end"
+      android:maxLines="3"
+      android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
+      tools:text="Kota Batam" />
+  </LinearLayout>
 
 </LinearLayout>

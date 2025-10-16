@@ -2,17 +2,25 @@ package com.waffiq.divenzz.ui.detail
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings.Global.getString
+import android.view.ViewGroup
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat.CONSUMED
+import androidx.core.view.WindowInsetsCompat.Type
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
+import com.waffiq.divenzz.R
 import com.waffiq.divenzz.R.drawable.ic_image_error_wide
 import com.waffiq.divenzz.R.drawable.ic_image_placeholder
 import com.waffiq.divenzz.databinding.ActivityDetailBinding
 import com.waffiq.divenzz.utils.Helpers.convertToReadableDateTimeCompat
+import com.waffiq.divenzz.utils.Helpers.handleOverHeightAppBar
 import io.noties.markwon.Markwon
 import io.noties.markwon.html.HtmlPlugin
 import io.noties.markwon.image.glide.GlideImagesPlugin
@@ -31,6 +39,18 @@ class DetailActivity : AppCompatActivity() {
 
     binding = ActivityDetailBinding.inflate(layoutInflater)
     setContentView(binding.root)
+
+    binding.appBarLayout.handleOverHeightAppBar()
+    ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, insets ->
+      val systemBars = insets.getInsets(Type.systemBars())
+      binding.btnOpenLink.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+        leftMargin = systemBars.left
+        bottomMargin = systemBars.bottom + 32
+        rightMargin = systemBars.right + 32
+      }
+      insets
+    }
+    ViewCompat.requestApplyInsets(binding.root)
 
     binding.btnBack.setOnClickListener {
       onBackPressedDispatcher.onBackPressed()
@@ -87,7 +107,12 @@ class DetailActivity : AppCompatActivity() {
           .error(ic_image_error_wide)
           .into(binding.ivPicture)
 
-        val quota = "${event.registrants} / ${event.quota}"
+        val quota = getString(
+          R.string.quota_left,
+          event.registrants,
+          event.quota,
+           (event.quota?.minus(event.registrants ?: 0))
+        )
         val date = convertToReadableDateTimeCompat(event.beginTime, event.endTime)
         val owner = event.ownerName + ", "
 

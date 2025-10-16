@@ -7,30 +7,19 @@
   tools:context=".ui.past.PastEventViewModel">
 
   <com.google.android.material.appbar.AppBarLayout
-    android:id="@+id/appBarLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/colorSurface"
     android:elevation="0dp"
-    android:fitsSystemWindows="true"
     app:liftOnScroll="true"
     app:statusBarForeground="?attr/colorSurface">
 
     <com.google.android.material.appbar.MaterialToolbar
-      android:id="@+id/toolbar"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:background="?attr/colorSurface"
-      android:elevation="4dp"
-      android:minHeight="?attr/actionBarSize"
-      android:outlineProvider="background"
-      android:paddingHorizontal="16dp"
-      android:theme="@style/ThemeOverlay.Material3.Toolbar.Surface"
+      style="@style/ToolbarStyle"
       app:contentInsetStartWithNavigation="0dp"
       app:layout_scrollFlags="scroll|enterAlways"
       app:navigationIconTint="?attr/colorOnSurface">
 
-      <!-- Custom content inside Toolbar -->
       <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,14 +47,8 @@
   </com.google.android.material.appbar.AppBarLayout>
 
   <androidx.recyclerview.widget.RecyclerView
-    android:layout_marginHorizontal="@dimen/short_margin"
     android:id="@+id/rv_events"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipToPadding="false"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/rv_padding"
-    android:scrollbars="vertical"
+    style="@style/DefaultRecycleViewStyle"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:listitem="@layout/item_event" />
 
