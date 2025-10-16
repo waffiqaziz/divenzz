@@ -17,7 +17,7 @@
     <com.google.android.material.appbar.MaterialToolbar
       style="@style/ToolbarStyle"
       app:contentInsetStartWithNavigation="0dp"
-      app:layout_scrollFlags="scroll|enterAlways"
+      app:layout_scrollFlags="scroll|snap"
       app:navigationIconTint="?attr/colorOnSurface">
 
       <LinearLayout
