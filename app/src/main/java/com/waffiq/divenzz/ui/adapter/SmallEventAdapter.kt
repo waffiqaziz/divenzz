@@ -11,6 +11,7 @@ import com.waffiq.divenzz.R.drawable.ic_image_broken
 import com.waffiq.divenzz.R.drawable.ic_image_placeholder
 import com.waffiq.divenzz.core.data.remote.response.EventResponse
 import com.waffiq.divenzz.databinding.ItemSmallEventBinding
+import com.waffiq.divenzz.utils.Helpers.convertToReadableDateTimeCompat
 
 class SmallEventAdapter(
   private val onClick: (EventResponse) -> Unit,
@@ -38,6 +39,8 @@ class SmallEventAdapter(
     RecyclerView.ViewHolder(binding.root) {
 
     fun onBind(event: EventResponse) {
+      val date = convertToReadableDateTimeCompat(event.beginTime, event.endTime)
+
       Glide.with(binding.root.context)
         .load(event.imageLogo)
         .placeholder(ic_image_placeholder)
@@ -46,6 +49,8 @@ class SmallEventAdapter(
         .transition(withCrossFade())
         .into(binding.ivEventImage)
       binding.tvEventName.text = event.name
+      binding.tvLocation.text = event.cityName
+      binding.tvDateDay.text = date.first
 
       binding.root.setOnClickListener {
         onClick(event)

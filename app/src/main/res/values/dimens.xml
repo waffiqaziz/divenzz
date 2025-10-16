@@ -1,8 +1,9 @@
 <resources>
-  <!-- Default screen margins, per the Android Design guidelines. -->
   <dimen name="margin">12dp</dimen>
   <dimen name="short_margin">8dp</dimen>
+  <dimen name="tiny_margin">4dp</dimen>
   <dimen name="item_card_margin">6dp</dimen>
   <dimen name="corner_radius">8dp</dimen>
   <dimen name="rv_padding">140dp</dimen>
+  <dimen name="padding_top_bar">32dp</dimen>
 </resources>

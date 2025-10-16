@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.waffiq.divenzz.core.data.remote.response.EventResponse
 import com.waffiq.divenzz.databinding.FragmentPastEventBinding
 import com.waffiq.divenzz.ui.adapter.EventAdapter
+import com.waffiq.divenzz.utils.Helpers.getThemeColor
 import com.waffiq.divenzz.utils.Helpers.openDetailPage
+import com.waffiq.divenzz.utils.Helpers.setStatusBarColor
 
 class PastEventFragment : Fragment() {
 
