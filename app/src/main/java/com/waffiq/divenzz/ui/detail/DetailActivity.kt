@@ -2,14 +2,12 @@ package com.waffiq.divenzz.ui.detail
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings.Global.getString
 import android.view.ViewGroup
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat.CONSUMED
 import androidx.core.view.WindowInsetsCompat.Type
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
