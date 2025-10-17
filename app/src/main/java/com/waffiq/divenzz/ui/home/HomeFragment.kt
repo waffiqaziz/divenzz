@@ -65,6 +65,8 @@ class HomeFragment : Fragment() {
     // observe loading states
     viewModelUpcoming.isLoading.observe(viewLifecycleOwner) {
       binding.loading.progressCircular.isVisible = it
+      binding.tvPastEvents.isVisible = !it
+      binding.tvUpcomingEvents.isVisible = !it
     }
 
     // observe error states

@@ -19,12 +19,16 @@ class SearchViewModel : ViewModel() {
   private val _isLoading = MutableLiveData<Boolean>()
   val isLoading: LiveData<Boolean> = _isLoading
 
-  private val _snackBarText = MutableLiveData<String>()
-  val snackBarText: LiveData<String> = _snackBarText
+  private val _isEmpty = MutableLiveData<Boolean>()
+  val isEmpty: LiveData<Boolean> = _isEmpty
 
-  fun getUpcomingEvent(query: String) {
-    _snackBarText.value = ""
+  private val _errorMessage = MutableLiveData<String>()
+  val errorMessage: LiveData<String> = _errorMessage
+
+  fun search(query: String) {
+    _errorMessage.value = ""
     _isLoading.value = true
+    _isEmpty.value = false
 
     val client = EventApiConfig.Companion.getApiService().search(query)
     client.enqueue(object : Callback<ListEventResponse> {
@@ -36,21 +40,19 @@ class SearchViewModel : ViewModel() {
         if (response.isSuccessful) {
           val responseBody = response.body()
           if (responseBody != null && responseBody.listEvents != null) {
-            if (responseBody.listEvents.isEmpty()) {
-              _snackBarText.value = "No Events Found"
-            }
+            _isEmpty.value = responseBody.listEvents.isEmpty()
             _events.value = responseBody.listEvents.filterNotNull()
           }
         } else {
           Log.e(TAG, "onFailure: ${response.message()}")
-          _snackBarText.value = response.message() ?: FAILED
+          _errorMessage.value = response.message() ?: FAILED
         }
       }
 
       override fun onFailure(call: Call<ListEventResponse>, t: Throwable) {
         _isLoading.value = false
         Log.e(TAG, "onFailure: ${t.message}")
-        _snackBarText.value = FAILED
+        _errorMessage.value = FAILED
       }
     })
   }
