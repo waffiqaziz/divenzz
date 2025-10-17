@@ -104,6 +104,7 @@
     <item name="android:layout_marginStart">@dimen/item_card_margin</item>
     <item name="android:layout_marginEnd">@dimen/item_card_margin</item>
     <item name="android:clipToPadding">false</item>
+    <item name="android:paddingBottom">@dimen/rv_padding</item>
     <item name="android:scrollbars">vertical</item>
     <item name="android:outlineProvider">background</item>
   </style>
