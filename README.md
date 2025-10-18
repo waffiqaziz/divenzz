@@ -1,13 +1,23 @@
-<div align="center">
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://i.postimg.cc/wB6VKj3v/Mode-Light.png">
-  <source media="(prefers-color-scheme: light)" srcset="https://i.postimg.cc/pd2ZNLyL/Mode-Dark.png">
-  <img alt="BAZZ Movies" src="docs/images/bazz-movies.svg">
-</picture>
+<p align="center">
+    <picture>
+      <source
+        media="(prefers-color-scheme: dark)"
+        srcset="https://i.postimg.cc/pd2ZNLyL/Mode-Dark.png"
+        width="340"
+      >
+      <source
+        media="(prefers-color-scheme: light)"
+        srcset="https://i.postimg.cc/wB6VKj3v/Mode-Light.png"
+        width="340"
+      >
+      <img alt="Divenzz" src="https://i.postimg.cc/pd2ZNLyL/Mode-Dark.png">
+    </picture>
+</p>
 
-An Android app to explore Dico  ding events—discover upcoming and past events with ease.
+<h3 align="center">
+Explore Dicoding events, discover upcoming, and past events with ease
+</h3>
 
-</div>
 
 ## 🌟 Features
 
