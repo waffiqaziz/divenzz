@@ -3,12 +3,12 @@
       <source
         media="(prefers-color-scheme: dark)"
         srcset="https://i.postimg.cc/pd2ZNLyL/Mode-Dark.png"
-        width="250"
+        width="340"
       >
       <source
         media="(prefers-color-scheme: light)"
         srcset="https://i.postimg.cc/wB6VKj3v/Mode-Light.png"
-        width="250"
+        width="340"
       >
       <img alt="Divenzz" src="https://i.postimg.cc/pd2ZNLyL/Mode-Dark.png">
     </picture>
