@@ -13,9 +13,9 @@ import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
-import com.waffiq.divenzz.R
 import com.waffiq.divenzz.R.drawable.ic_image_error_wide
 import com.waffiq.divenzz.R.drawable.ic_image_placeholder
+import com.waffiq.divenzz.R.plurals.quota_left
 import com.waffiq.divenzz.databinding.ActivityDetailBinding
 import com.waffiq.divenzz.utils.Helpers.convertToReadableDateTimeCompat
 import com.waffiq.divenzz.utils.Helpers.handleOverHeightAppBar
@@ -105,11 +105,13 @@ class DetailActivity : AppCompatActivity() {
           .error(ic_image_error_wide)
           .into(binding.ivPicture)
 
-        val quota = getString(
-          R.string.quota_left,
-          event.registrants,
-          event.quota,
-           (event.quota?.minus(event.registrants ?: 0))
+        val left = (event.quota ?: 0) - (event.registrants ?: 0)
+        val quota = resources.getQuantityString(
+          quota_left,
+          left,
+          event.registrants ?: 0,
+          event.quota ?: 0,
+          left
         )
         val date = convertToReadableDateTimeCompat(event.beginTime, event.endTime)
         val owner = event.ownerName + ", "
@@ -122,18 +124,14 @@ class DetailActivity : AppCompatActivity() {
         binding.tvPlace.text = event.cityName
         binding.tvQuota.text = quota
 
-
         val decodedHtml = event.description?.replace("\\u003C", "<")
           ?.replace("\\u003E", ">")
           ?.replace("\\u0026", "&").toString()
-
         val markwon = Markwon.builder(this)
           .usePlugin(HtmlPlugin.create())
           .usePlugin(GlideImagesPlugin.create(this))
           .build()
-
         markwon.setMarkdown(binding.tvDescription, decodedHtml)
-
 
         binding.btnOpenLink.setOnClickListener {
           startActivity(Intent(Intent.ACTION_VIEW, event.link?.toUri()))

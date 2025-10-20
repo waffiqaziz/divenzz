@@ -49,4 +49,6 @@
 
   <color name="white">#FFFFFFFF</color>
   <color name="black_alpha">#90161619</color>
+
+  <color name="splash_Screen">#2A4264</color>
 </resources>

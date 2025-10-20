@@ -5,5 +5,5 @@
   <dimen name="item_card_margin">6dp</dimen>
   <dimen name="corner_radius">8dp</dimen>
   <dimen name="rv_padding">140dp</dimen>
-  <dimen name="padding_top_bar">32dp</dimen>
+  <dimen name="padding_top_bar">48dp</dimen>
 </resources>

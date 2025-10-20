@@ -46,8 +46,9 @@ android {
 dependencies {
 
   implementation(libs.androidx.appcompat)
-  implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.activity)
+  implementation(libs.androidx.core.ktx)
+  implementation(libs.androidx.core.splashscreen)
   implementation(libs.androidx.constraintlayout)
   implementation(libs.androidx.lifecycle.livedata.ktx)
   implementation(libs.androidx.lifecycle.viewmodel.ktx)
@@ -65,6 +66,8 @@ dependencies {
 
   implementation(libs.glide)
   ksp(libs.glide.compiler)
+
+  implementation(libs.bundles.datastore)
 
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)

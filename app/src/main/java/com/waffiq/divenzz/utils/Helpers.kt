@@ -4,6 +4,7 @@ import android.R.anim.fade_in
 import android.R.anim.fade_out
 import android.app.Activity
 import android.content.Intent
+import android.content.res.Configuration
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
@@ -73,4 +74,11 @@ object Helpers {
       CONSUMED
     }
   }
+
+  /**
+   * Checks if the current theme is set to dark mode.
+   */
+  val Activity.isDarkTheme: Boolean
+    get() = this.resources.configuration.uiMode and
+      Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
 }

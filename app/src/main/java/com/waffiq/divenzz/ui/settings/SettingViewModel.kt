@@ -1,13 +1,19 @@
 package com.waffiq.divenzz.ui.settings
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.waffiq.divenzz.core.data.datastore.SettingPreferences
+import com.waffiq.divenzz.utils.ThemeMode
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 
-class SettingViewModel : ViewModel() {
+class SettingViewModel(private val pref: SettingPreferences) : ViewModel() {
 
-  private val _text = MutableLiveData<String>().apply {
-    value = "This is Setting Fragment"
+  val themeSettings: Flow<ThemeMode> = pref.getThemeSetting()
+
+  fun saveThemeSetting(themeMode: ThemeMode) {
+    viewModelScope.launch {
+      pref.saveThemeSetting(themeMode)
+    }
   }
-  val text: LiveData<String> = _text
 }
