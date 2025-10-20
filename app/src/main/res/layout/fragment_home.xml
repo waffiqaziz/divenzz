@@ -13,13 +13,16 @@
 
     <TextView
       android:id="@+id/tv_upcoming_events"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
+      style="@style/ToolbarTitleStyle"
       android:layout_marginStart="@dimen/short_margin"
       android:layout_marginTop="@dimen/padding_top_bar"
-      android:fontFamily="@font/nunito_sans_bold"
-      android:text="@string/upcoming_events"
-      android:textAppearance="@style/TextAppearance.Material3.TitleLarge" />
+      android:text="@string/upcoming_events" />
+
+    <com.google.android.material.divider.MaterialDivider
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginHorizontal="@dimen/short_margin"
+      android:layout_marginTop="@dimen/short_margin" />
 
     <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/rv_events_horizontal"
@@ -36,13 +39,16 @@
 
     <TextView
       android:id="@+id/tv_past_events"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
+      style="@style/ToolbarTitleStyle"
       android:layout_marginStart="@dimen/short_margin"
       android:layout_marginTop="@dimen/margin"
-      android:fontFamily="@font/nunito_sans_bold"
-      android:text="@string/past_events"
-      android:textAppearance="@style/TextAppearance.Material3.TitleLarge" />
+      android:text="@string/past_events" />
+
+    <com.google.android.material.divider.MaterialDivider
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginHorizontal="@dimen/short_margin"
+      android:layout_marginVertical="@dimen/short_margin" />
 
     <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/rv_events_vertical"

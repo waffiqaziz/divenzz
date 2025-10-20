@@ -1,5 +1,6 @@
 package com.waffiq.divenzz.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,8 @@ class SuggestionAdapter(
   private val onItemClick: (String) -> Unit
 ) : RecyclerView.Adapter<SuggestionAdapter.ViewHolder>() {
 
+  @SuppressLint("NotifyDataSetChanged")
+  // safe to use notifyDataSetChanged() due to small data suggestion list
   fun updateSuggestions(newItems: List<String>) {
     items = newItems
     notifyDataSetChanged()

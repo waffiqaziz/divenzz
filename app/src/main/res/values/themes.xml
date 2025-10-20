@@ -58,12 +58,6 @@
     <item name="cornerSize">@dimen/corner_radius</item>
   </style>
 
-  <style name="ToolbarTitleText" parent="TextAppearance.Material3.TitleLarge">
-    <item name="fontFamily">@font/nunito_sans_bold</item>
-    <item name="android:fontFamily">@font/nunito_sans_bold</item>
-    <item name="android:textAppearance">@style/TextAppearance.Material3.TitleLarge</item>
-  </style>
-
   <style name="CardTitleItemStyle">
     <item name="android:letterSpacing">0.08</item>
     <item name="android:textAllCaps">true</item>
@@ -98,6 +92,22 @@
     <item name="android:outlineProvider">background</item>
   </style>
 
+  <style name="ToolbarTitleStyle" >
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:fontFamily">@font/nunito_sans_bold</item>
+    <item name="android:textAllCaps">true</item>
+    <item name="android:textAppearance">@style/TextAppearance.Material3.TitleMedium</item>
+    <item name="android:textColor">?attr/colorPrimary</item>
+  </style>
+
+  <style name="ToolbarTextStyle" >
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:textAppearance">@style/TextAppearance.Material3.BodySmall</item>
+    <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+  </style>
+
   <style name="DefaultRecycleViewStyle">
     <item name="android:layout_height">match_parent</item>
     <item name="android:layout_width">match_parent</item>
@@ -107,6 +117,13 @@
     <item name="android:paddingBottom">@dimen/rv_padding</item>
     <item name="android:scrollbars">vertical</item>
     <item name="android:outlineProvider">background</item>
+  </style>
+
+  <style name="SplashScreenTheme" parent="Theme.SplashScreen">
+    <item name="windowSplashScreenAnimatedIcon">@drawable/ic_icon</item>
+    <item name="windowSplashScreenBackground">@color/md_theme_onSecondaryFixed</item>
+    <item name="windowSplashScreenAnimationDuration">300</item>
+    <item name="postSplashScreenTheme">@style/Theme.Divenzz</item>
   </style>
 
 </resources>

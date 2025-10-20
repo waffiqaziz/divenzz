@@ -21,11 +21,14 @@ espressoCore = "3.7.0"
 appcompat = "1.7.1"
 material = "1.13.0"
 constraintlayout = "2.2.1"
+splashscreen = "1.0.1"
 lifecycleLivedataKtx = "2.9.4"
 lifecycleViewmodelKtx = "2.9.4"
 navigationFragmentKtx = "2.9.5"
 navigationUiKtx = "2.9.5"
 swiperefreshlayout = "1.2.0-beta01"
+
+datastore = "1.1.7"
 
 # Networking
 retrofit = "3.0.0"
@@ -46,6 +49,7 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
 androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
@@ -68,6 +72,10 @@ markwon-core = { module = "io.noties.markwon:core", version.ref = "markwon" }
 markwon-image-glide = { module = "io.noties.markwon:image-glide", version.ref = "markwon" }
 markwon-html = { module = "io.noties.markwon:html", version.ref = "markwon" }
 
+# Datastore
+androidx-datastore-core = { group = "androidx.datastore", name = "datastore-core", version.ref = "datastore" }
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -80,4 +88,9 @@ retrofit = [
   "retrofit-converter-moshi",
   "moshi-kotlin",
   "okhttp-logging-interceptor"
+]
+
+datastore = [
+  "androidx-datastore-core",
+  "androidx-datastore-preferences"
 ]

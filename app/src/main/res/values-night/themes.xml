@@ -1,5 +1,5 @@
 <resources>
-  <style name="Theme.Divenzz" parent="Theme.Material3.DayNight.NoActionBar">
+  <style name="Theme.Divenzz" parent="Theme.Material3.Dark.NoActionBar">
     <item name="colorPrimary">@color/md_theme_primary</item>
     <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
     <item name="colorPrimaryContainer">@color/md_theme_primaryContainer</item>
@@ -49,5 +49,12 @@
 
     <!-- Status bar color. -->
     <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+  </style>
+
+  <style name="SplashScreenTheme" parent="Theme.SplashScreen">
+    <item name="windowSplashScreenAnimatedIcon">@drawable/ic_icon</item>
+    <item name="windowSplashScreenBackground">@color/md_theme_onSecondaryFixed</item>
+    <item name="windowSplashScreenAnimationDuration">300</item>
+    <item name="postSplashScreenTheme">@style/Theme.Divenzz</item>
   </style>
 </resources>

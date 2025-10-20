@@ -28,20 +28,13 @@
 
         <TextView
           android:id="@+id/titleText"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:fontFamily="@font/nunito_sans_regular"
-          android:text="@string/dicoding_event"
-          android:textAppearance="@style/ToolbarTitleText"
-          android:textColor="?attr/colorOnSurface" />
+          style="@style/ToolbarTitleStyle"
+          android:text="@string/dicoding_event" />
 
         <TextView
-          android:id="@+id/subtitleText"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/home_toolbar_description"
-          android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-          android:textColor="?attr/colorOnSurfaceVariant" />
+          style="@style/ToolbarTextStyle"
+          android:text="@string/home_toolbar_description" />
+
       </LinearLayout>
     </com.google.android.material.appbar.MaterialToolbar>
   </com.google.android.material.appbar.AppBarLayout>
