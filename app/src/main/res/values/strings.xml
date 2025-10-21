@@ -26,6 +26,9 @@
     <item quantity="one">%1$d / %2$d (%3$d left)</item>
     <item quantity="other">%1$d / %2$d (%3$d left)</item>
   </plurals>
+  <string name="added_to_favorite">Added to favorite</string>
+  <string name="removed_from_favorite">Removed from favorite</string>
+  <string name="register">Register</string>
 
   <!-- Search -->
   <string name="start_searching">Start searching</string>
@@ -43,4 +46,13 @@
   <string name="easy_on_the_eyes">Easy on the eyes</string>
   <string name="dark_theme">Dark Theme</string>
   <string name="appearance">Appearance</string>
+
+  <!-- Favorites -->
+  <string name="open_favorite_page">Open Favorite Page</string>
+  <string name="add_to_favorite">Add to favorite</string>
+  <string name="favorite">Favorite</string>
+  <string name="your_favorite_item">Your favorite item</string>
+  <string name="sorry_no_favorites_found">Sorry no favorites found</string>
+  <string name="add_events_to_your_favorites_firs">Add events to your favorites first.</string>
+  <string name="favorite_events_icon">Favorite Events Icon</string>
 </resources>

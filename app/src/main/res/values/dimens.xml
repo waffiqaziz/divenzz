@@ -6,4 +6,5 @@
   <dimen name="corner_radius">8dp</dimen>
   <dimen name="rv_padding">140dp</dimen>
   <dimen name="padding_top_bar">48dp</dimen>
+  <dimen name="bottom_nav_height">86dp</dimen>
 </resources>

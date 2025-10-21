@@ -31,7 +31,7 @@ class UpcomingEventFragment : Fragment() {
     val root: View = binding.root
 
     setupRecyclerView()
-    getNotes()
+    getEvents()
     btnAction()
 
     return root
@@ -48,7 +48,7 @@ class UpcomingEventFragment : Fragment() {
     requireActivity().openDetailPage(event.id)
   }
 
-  private fun getNotes() {
+  private fun getEvents() {
     // observe loading states
     viewModel.isLoading.observe(viewLifecycleOwner) {
       binding.loading.progressCircular.isVisible = it

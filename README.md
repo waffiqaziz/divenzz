@@ -23,6 +23,7 @@ Explore Dicoding events, discover upcoming, and past events with ease
 
 - Browse upcoming and past events
 - Search events by keyword
+- Save favorite on local storage
 - View detailed event information
 - Dark and light mode support
 
@@ -42,7 +43,7 @@ Explore Dicoding events, discover upcoming, and past events with ease
 ### Prerequisites
 
 - [Android Studio](https://developer.android.com/studio)
-- JDK 17+
+- JDK 21
 - Android SDK 24+
 
 ### Installation

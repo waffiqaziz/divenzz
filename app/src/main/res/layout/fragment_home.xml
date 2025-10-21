@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
@@ -69,5 +70,14 @@
   <include
     android:id="@+id/error"
     layout="@layout/error_view" />
+
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/btn_open_favorite"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|end"
+    android:layout_marginEnd="@dimen/margin"
+    android:contentDescription="@string/open_favorite_page"
+    app:srcCompat="@drawable/ic_favorite_event"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

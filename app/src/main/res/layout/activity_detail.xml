@@ -64,13 +64,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content">
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
         <com.waffiq.divenzz.ui.customview.AspectRatioImageView
           android:id="@+id/iv_picture"
           style="@style/roundedCornersImageView"
@@ -164,7 +157,6 @@
                   style="@style/CardItemStyle"
                   tools:text="6:00 - 8:00 PM" />
               </LinearLayout>
-
             </LinearLayout>
 
             <!-- Spacer -->
@@ -205,12 +197,10 @@
                   android:id="@+id/tv_quota"
                   style="@style/CardItemStyle"
                   tools:text="386/1000" />
+
               </LinearLayout>
-
             </LinearLayout>
-
           </LinearLayout>
-
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
@@ -227,16 +217,76 @@
     </androidx.core.widget.NestedScrollView>
   </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-  <com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:id="@+id/btn_open_link"
+  <com.google.android.material.card.MaterialCardView
+    android:layout_marginStart="24dp"
+    android:id="@+id/split_fab"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom|end"
-    android:layout_margin="@dimen/margin"
-    android:contentDescription="@string/open_link"
-    app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
-    app:srcCompat="@drawable/ic_link"
-    app:tint="?attr/colorOnPrimaryContainer" />
+    android:layout_height="56dp"
+    android:layout_gravity="bottom|center"
+    android:layout_marginEnd="@dimen/margin"
+    android:layout_marginBottom="@dimen/margin"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="6dp"
+    app:strokeWidth="0dp"
+    app:layout_behavior=".ui.customview.HideOnScrollBehavior"
+    app:cardBackgroundColor="?attr/colorPrimaryContainer">
+
+    <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:orientation="horizontal"
+      android:gravity="center">
+
+      <LinearLayout
+        android:id="@+id/btn_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingHorizontal="20dp"
+        android:background="?attr/selectableItemBackground">
+
+        <ImageView
+          android:id="@+id/iv_favorite_icon"
+          android:layout_width="24dp"
+          android:layout_height="24dp"
+          android:src="@drawable/ic_favorite"
+          android:contentDescription="@string/add_to_favorite"
+          app:tint="?attr/colorOnPrimaryContainer" />
+      </LinearLayout>
+
+      <com.google.android.material.divider.MaterialDivider
+        android:layout_width="1dp"
+        android:layout_height="24dp"
+        android:background="?attr/colorOutlineVariant"
+        android:layout_marginVertical="@dimen/short_margin" />
+
+      <LinearLayout
+        android:id="@+id/btn_register"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingHorizontal="20dp"
+        android:background="?attr/selectableItemBackground">
+
+        <ImageView
+          android:layout_width="24dp"
+          android:layout_height="24dp"
+          android:src="@drawable/ic_link"
+          android:contentDescription="@string/open_link"
+          app:tint="?attr/colorOnPrimaryContainer" />
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="8dp"
+          android:text="@string/register"
+          android:textColor="?attr/colorOnPrimaryContainer"
+          android:textSize="14sp" />
+      </LinearLayout>
+
+    </LinearLayout>
+  </com.google.android.material.card.MaterialCardView>
+
 
   <include
     android:id="@+id/loading"
