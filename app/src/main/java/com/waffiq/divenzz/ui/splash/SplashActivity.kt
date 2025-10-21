@@ -33,7 +33,8 @@ class SplashActivity : AppCompatActivity() {
     splashScreen.setKeepOnScreenCondition { keepSplash }
 
     val pref = SettingPreferences.getInstance(this.dataStore)
-    viewModel = ViewModelProvider(this, ViewModelFactory(pref))[SettingViewModel::class.java]
+    val factory = ViewModelFactory.getInstance(this.application, pref)
+    viewModel = ViewModelProvider(this, factory)[SettingViewModel::class.java]
 
     lifecycleScope.launch {
       when (viewModel.themeSettings.first()) {

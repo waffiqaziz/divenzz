@@ -36,7 +36,8 @@ class SettingFragment : Fragment() {
     _binding = FragmentSettingBinding.inflate(inflater, container, false)
 
     val pref = SettingPreferences.getInstance(requireActivity().dataStore)
-    viewModel = ViewModelProvider(this, ViewModelFactory(pref))[SettingViewModel::class.java]
+    val factory = ViewModelFactory.getInstance(requireActivity().application, pref)
+    viewModel = ViewModelProvider(requireActivity(), factory)[SettingViewModel::class.java]
 
     return binding.root
   }

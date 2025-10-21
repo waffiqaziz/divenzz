@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/main"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".ui.favorite.FavoriteActivity">
+
+  <com.google.android.material.appbar.AppBarLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorSurface"
+    android:elevation="0dp"
+    app:liftOnScroll="true"
+    app:statusBarForeground="?attr/colorSurface">
+
+    <com.google.android.material.appbar.MaterialToolbar
+      style="@style/ToolbarStyle"
+      app:contentInsetStartWithNavigation="0dp"
+      app:layout_scrollFlags="scroll|snap"
+      app:navigationIconTint="?attr/colorOnSurface">
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start|center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+          android:id="@+id/titleText"
+          style="@style/ToolbarTitleStyle"
+          android:text="@string/favorite" />
+
+        <TextView
+          style="@style/ToolbarTextStyle"
+          android:text="@string/your_favorite_item" />
+
+      </LinearLayout>
+    </com.google.android.material.appbar.MaterialToolbar>
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/rv_events"
+    style="@style/DefaultRecycleViewStyle"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:listitem="@layout/item_event" />
+
+  <include
+    android:id="@+id/empty_state"
+    layout="@layout/empty_favorite" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

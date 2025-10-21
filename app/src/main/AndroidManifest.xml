@@ -11,6 +11,9 @@
     android:supportsRtl="true"
     android:theme="@style/Theme.Divenzz">
     <activity
+      android:name=".ui.favorite.FavoriteActivity"
+      android:exported="false" />
+    <activity
       android:name=".ui.splash.SplashActivity"
       android:exported="true"
       android:theme="@style/SplashScreenTheme">

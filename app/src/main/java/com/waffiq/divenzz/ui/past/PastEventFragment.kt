@@ -31,7 +31,7 @@ class PastEventFragment : Fragment() {
     val root: View = binding.root
 
     setupRecyclerView()
-    getNotes()
+    getPastEvents()
     btnAction()
 
     return root
@@ -48,7 +48,7 @@ class PastEventFragment : Fragment() {
     requireActivity().openDetailPage(event.id)
   }
 
-  private fun getNotes() {
+  private fun getPastEvents() {
     // observe loading states
     viewModel.isLoading.observe(viewLifecycleOwner) {
       binding.loading.progressCircular.isVisible = it

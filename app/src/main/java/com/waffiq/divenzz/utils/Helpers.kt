@@ -14,13 +14,14 @@ import androidx.core.view.WindowInsetsCompat.Type
 import androidx.core.view.updateLayoutParams
 import com.google.android.material.appbar.AppBarLayout
 import com.waffiq.divenzz.ui.detail.DetailActivity
+import com.waffiq.divenzz.ui.favorite.FavoriteActivity
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 object Helpers {
 
   /**
-   * Opens the DetailActivity with a fade-in and fade-out animation.
+   * Open [DetailActivity] with a fade-in and fade-out animation.
    *
    * @param eventId The ID of the event to be displayed in the detail page.
    */
@@ -28,6 +29,15 @@ object Helpers {
     val intent = Intent(this, DetailActivity::class.java).apply {
       putExtra(DetailActivity.EVENT_ID, eventId)
     }
+    val options = ActivityOptionsCompat.makeCustomAnimation(this, fade_in, fade_out)
+    ActivityCompat.startActivities(this, arrayOf(intent), options.toBundle())
+  }
+
+  /**
+   * Open [FavoriteActivity] with a fade-in and fade-out animation.
+   */
+  fun Activity.openFavoritePage() {
+    val intent = Intent(this, FavoriteActivity::class.java)
     val options = ActivityOptionsCompat.makeCustomAnimation(this, fade_in, fade_out)
     ActivityCompat.startActivities(this, arrayOf(intent), options.toBundle())
   }
