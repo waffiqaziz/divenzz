@@ -7,14 +7,20 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import com.waffiq.divenzz.BuildConfig
 
 class EventApiConfig {
 
   companion object {
 
     fun getApiService(): EventApiService {
-      val loggingInterceptor =
-        HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+      val loggingInterceptor = HttpLoggingInterceptor().apply {
+        level = if (BuildConfig.DEBUG) {
+          HttpLoggingInterceptor.Level.BODY
+        } else {
+          HttpLoggingInterceptor.Level.NONE
+        }
+      }
 
       val client = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)

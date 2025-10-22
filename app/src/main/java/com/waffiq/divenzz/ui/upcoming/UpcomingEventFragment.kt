@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.waffiq.divenzz.R.string.no_upcoming_event_found
 import com.waffiq.divenzz.core.data.remote.response.EventResponse
 import com.waffiq.divenzz.databinding.FragmentUpcomingEventBinding
 import com.waffiq.divenzz.ui.adapter.EventAdapter
+import com.waffiq.divenzz.ui.state.EventUiState
+import com.waffiq.divenzz.ui.viewmodel.ViewModelFactory
 import com.waffiq.divenzz.utils.Helpers.openDetailPage
 
 class UpcomingEventFragment : Fragment() {
@@ -18,7 +21,7 @@ class UpcomingEventFragment : Fragment() {
   private var _binding: FragmentUpcomingEventBinding? = null
   private val binding get() = _binding!!
 
-  private val viewModel by viewModels<UpcomingEventViewModel>()
+  private lateinit var viewModel : UpcomingEventViewModel
 
   private lateinit var eventAdapter: EventAdapter
 
@@ -30,9 +33,12 @@ class UpcomingEventFragment : Fragment() {
     _binding = FragmentUpcomingEventBinding.inflate(inflater, container, false)
     val root: View = binding.root
 
+    val factory = ViewModelFactory.getInstance(requireActivity())
+    viewModel = ViewModelProvider(this, factory)[UpcomingEventViewModel::class.java]
+
     setupRecyclerView()
-    getEvents()
-    btnAction()
+    observePastEvents()
+    setupErrorRetry()
 
     return root
   }
@@ -48,35 +54,44 @@ class UpcomingEventFragment : Fragment() {
     requireActivity().openDetailPage(event.id)
   }
 
-  private fun getEvents() {
-    // observe loading states
-    viewModel.isLoading.observe(viewLifecycleOwner) {
-      binding.loading.progressCircular.isVisible = it
-    }
+  private fun observePastEvents() {
+    viewModel.uiState.observe(viewLifecycleOwner) { state ->
+      when (state) {
+        is EventUiState.Loading -> {
+          binding.loading.progressCircular.isVisible = true
+          binding.error.root.isVisible = false
+          binding.rvEvents.isVisible = false
+        }
 
-    // observe error states
-    viewModel.snackBarText.observe(viewLifecycleOwner) {
-      if (it.isNotEmpty()) {
-        binding.error.root.isVisible = true
-        binding.rvEvents.isVisible = false
-      } else {
-        binding.error.root.isVisible = false
-        binding.rvEvents.isVisible = true
+        is EventUiState.Success -> {
+          binding.loading.progressCircular.isVisible = false
+          binding.error.root.isVisible = false
+          binding.rvEvents.isVisible = true
+          eventAdapter.setEvent(state.events)
+        }
+
+        is EventUiState.Error -> {
+          binding.loading.progressCircular.isVisible = false
+          binding.error.root.isVisible = true
+          binding.rvEvents.isVisible = false
+        }
+
+        is EventUiState.Empty -> {
+          binding.loading.progressCircular.isVisible = false
+          binding.error.root.isVisible = true
+          binding.rvEvents.isVisible = false
+          binding.error.tvErrorMessage.text = getString(no_upcoming_event_found)
+        }
       }
-      binding.error.tvErrorMessage.text = it
-    }
-
-    // observe data
-    viewModel.events.observe(viewLifecycleOwner) {
-      eventAdapter.setEvent(it)
     }
   }
 
-  private fun btnAction() {
+  private fun setupErrorRetry() {
     binding.error.btnTryAgain.setOnClickListener {
-      viewModel.getUpcomingEvent()
+      viewModel.getUpcomingEvents()
     }
   }
+
 
   override fun onDestroyView() {
     super.onDestroyView()

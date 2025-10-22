@@ -11,8 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.waffiq.divenzz.R.color.md_theme_secondaryContainer
-import com.waffiq.divenzz.core.data.datastore.SettingPreferences
-import com.waffiq.divenzz.core.data.datastore.dataStore
 import com.waffiq.divenzz.databinding.FragmentSettingBinding
 import com.waffiq.divenzz.ui.viewmodel.ViewModelFactory
 import com.waffiq.divenzz.utils.Helpers.isDarkTheme
@@ -35,8 +33,7 @@ class SettingFragment : Fragment() {
   ): View {
     _binding = FragmentSettingBinding.inflate(inflater, container, false)
 
-    val pref = SettingPreferences.getInstance(requireActivity().dataStore)
-    val factory = ViewModelFactory.getInstance(requireActivity().application, pref)
+    val factory = ViewModelFactory.getInstance(requireActivity())
     viewModel = ViewModelProvider(requireActivity(), factory)[SettingViewModel::class.java]
 
     return binding.root
@@ -47,7 +44,7 @@ class SettingFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
 
     lifecycleScope.launch {
-      viewModel.themeSettings.debounce(250L).collect {
+      viewModel.themeSettings.debounce(350L).collect {
         when (it) {
           ThemeMode.SYSTEM -> {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)

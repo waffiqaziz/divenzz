@@ -7,8 +7,6 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.waffiq.divenzz.core.data.datastore.SettingPreferences
-import com.waffiq.divenzz.core.data.datastore.dataStore
 import com.waffiq.divenzz.databinding.ActivityFavoriteBinding
 import com.waffiq.divenzz.ui.adapter.FavoriteAdapter
 import com.waffiq.divenzz.ui.viewmodel.ViewModelFactory
@@ -28,11 +26,8 @@ class FavoriteActivity : AppCompatActivity() {
     binding = ActivityFavoriteBinding.inflate(layoutInflater)
     setContentView(binding.root)
 
-    val pref = SettingPreferences.getInstance(this.dataStore)
-    viewModel = ViewModelProvider(
-      this,
-      ViewModelFactory(this.application, pref)
-    )[FavoriteViewModel::class.java]
+    val factory = ViewModelFactory.getInstance(this)
+    viewModel = ViewModelProvider(this, factory)[FavoriteViewModel::class.java]
 
     setupRecyclerView()
     getFavorites()
