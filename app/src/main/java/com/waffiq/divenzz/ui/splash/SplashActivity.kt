@@ -11,8 +11,6 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.waffiq.divenzz.MainActivity
-import com.waffiq.divenzz.core.data.datastore.SettingPreferences
-import com.waffiq.divenzz.core.data.datastore.dataStore
 import com.waffiq.divenzz.ui.settings.SettingViewModel
 import com.waffiq.divenzz.ui.viewmodel.ViewModelFactory
 import com.waffiq.divenzz.utils.ThemeMode
@@ -32,8 +30,7 @@ class SplashActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     splashScreen.setKeepOnScreenCondition { keepSplash }
 
-    val pref = SettingPreferences.getInstance(this.dataStore)
-    val factory = ViewModelFactory.getInstance(this.application, pref)
+    val factory = ViewModelFactory.getInstance(this)
     viewModel = ViewModelProvider(this, factory)[SettingViewModel::class.java]
 
     lifecycleScope.launch {
@@ -45,6 +42,6 @@ class SplashActivity : AppCompatActivity() {
     }
 
     startActivity(Intent(this, MainActivity::class.java))
-    finish()
+    finishAffinity()
   }
 }

@@ -9,12 +9,12 @@
   android:visibility="gone">
 
   <ImageView
-    android:id="@+id/emptyStateIcon"
+    android:id="@+id/iv_emptyStateIcon"
     android:layout_width="120dp"
     android:layout_height="120dp"
     android:alpha="0.6"
     android:contentDescription="@string/no_results_found"
-    android:src="@drawable/ic_search"
+    android:src="@drawable/ic_search_not_found"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +24,7 @@
 
   <!-- Title -->
   <TextView
-    android:id="@+id/emptyStateTitle"
+    android:id="@+id/tv_emtyStateTitle"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginTop="24dp"
@@ -35,10 +35,10 @@
     android:textColor="?attr/colorOnSurface"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/emptyStateIcon" />
+    app:layout_constraintTop_toBottomOf="@id/iv_emptyStateIcon" />
 
   <TextView
-    android:id="@+id/emptyStateDescription"
+    android:id="@+id/tv_emptyStateDescription"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
@@ -50,6 +50,6 @@
     android:textColor="?attr/colorOnSurfaceVariant"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/emptyStateTitle" />
+    app:layout_constraintTop_toBottomOf="@id/tv_emtyStateTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

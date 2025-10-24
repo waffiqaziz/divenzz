@@ -10,15 +10,17 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.search.SearchView
+import com.waffiq.divenzz.R.string.no_results_found_for
 import com.waffiq.divenzz.R.string.please_enter_a_search_query
 import com.waffiq.divenzz.core.data.remote.response.EventResponse
 import com.waffiq.divenzz.databinding.FragmentSearchBinding
 import com.waffiq.divenzz.ui.adapter.EventAdapter
 import com.waffiq.divenzz.ui.adapter.SuggestionAdapter
+import com.waffiq.divenzz.ui.viewmodel.ViewModelFactory
 import com.waffiq.divenzz.utils.Helpers.openDetailPage
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -29,7 +31,7 @@ class SearchFragment : Fragment() {
   private var _binding: FragmentSearchBinding? = null
   private val binding get() = _binding!!
 
-  private val viewModel by viewModels<SearchViewModel>()
+  private lateinit var viewModel: SearchViewModel
 
   private lateinit var eventAdapter: EventAdapter
   private lateinit var suggestionAdapter: SuggestionAdapter
@@ -56,6 +58,10 @@ class SearchFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+
+    val factory = ViewModelFactory.getInstance(requireActivity())
+    viewModel = ViewModelProvider(this, factory)[SearchViewModel::class.java]
+
     setupAdapters()
     setupRecyclerViews()
     setupSearchView()
@@ -132,43 +138,50 @@ class SearchFragment : Fragment() {
   }
 
   private fun observeViewModel() {
-    viewModel.events.observe(viewLifecycleOwner) { events ->
-      if (events.isNullOrEmpty()) {
-        binding.searchTextContainer.isVisible = false
-        binding.error.root.isVisible = false
-        binding.rvSearchResults.isVisible = false
-      } else {
-        binding.searchTextContainer.isVisible = false
-        binding.error.root.isVisible = false
-        binding.rvSearchResults.isVisible = true
-        eventAdapter.setEvent(events)
-      }
-    }
+    viewModel.uiState.observe(viewLifecycleOwner) { state ->
+      when (state) {
+        is SearchUiState.Initial -> {
+          binding.progressIndicator.isVisible = false
+          binding.searchTextContainer.isVisible = true
+          binding.rvSearchResults.isVisible = false
+          binding.emptyState.root.isVisible = false
+          binding.error.root.isVisible = false
+        }
 
-    // loading state
-    viewModel.isLoading.observe(viewLifecycleOwner) {
-      binding.progressIndicator.isVisible = it
-      binding.error.root.isVisible = !it
-      binding.rvSearchResults.isVisible = !it
-      binding.searchTextContainer.isVisible = !it
-    }
+        is SearchUiState.Loading -> {
+          binding.progressIndicator.isVisible = true
+          binding.searchTextContainer.isVisible = false
+          binding.rvSearchResults.isVisible = false
+          binding.emptyState.root.isVisible = false
+          binding.error.root.isVisible = false
+        }
 
-    // empty state
-    viewModel.isEmpty.observe(viewLifecycleOwner) {
-      binding.emptyState.root.isVisible = it
-    }
+        is SearchUiState.Success -> {
+          binding.progressIndicator.isVisible = false
+          binding.searchTextContainer.isVisible = false
+          binding.rvSearchResults.isVisible = true
+          binding.emptyState.root.isVisible = false
+          binding.error.root.isVisible = false
+          eventAdapter.setEvent(state.events)
+        }
 
-    // error messages
-    viewModel.errorMessage.observe(viewLifecycleOwner) {
-      if (it.isNotEmpty() || it != "") {
-        binding.searchTextContainer.isVisible = false
-        binding.error.root.isVisible = true
-        binding.rvSearchResults.isVisible = false
-        binding.error.tvErrorMessage.text = it
-      } else {
-        binding.searchTextContainer.isVisible = false
-        binding.error.root.isVisible = false
-        binding.rvSearchResults.isVisible = true
+        is SearchUiState.Empty -> {
+          binding.progressIndicator.isVisible = false
+          binding.searchTextContainer.isVisible = false
+          binding.rvSearchResults.isVisible = false
+          binding.emptyState.root.isVisible = true
+          binding.error.root.isVisible = false
+          binding.emptyState.tvEmptyStateDescription.text =
+            getString(no_results_found_for, state.query)
+        }
+
+        is SearchUiState.Error -> {
+          binding.progressIndicator.isVisible = false
+          binding.searchTextContainer.isVisible = false
+          binding.rvSearchResults.isVisible = false
+          binding.emptyState.root.isVisible = false
+          binding.error.root.isVisible = true
+        }
       }
     }
   }

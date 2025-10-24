@@ -1,66 +1,41 @@
 package com.waffiq.divenzz.ui.upcoming
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.waffiq.divenzz.core.data.remote.response.EventResponse
-import com.waffiq.divenzz.core.data.remote.response.ListEventResponse
-import com.waffiq.divenzz.core.data.remote.retrofit.EventApiConfig
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import androidx.lifecycle.viewModelScope
+import com.waffiq.divenzz.core.data.repository.EventRepository
+import com.waffiq.divenzz.ui.state.EventUiState
+import com.waffiq.divenzz.utils.NetworkResult
+import kotlinx.coroutines.launch
 
-class UpcomingEventViewModel : ViewModel() {
+class UpcomingEventViewModel(
+  private val repository: EventRepository,
+) : ViewModel() {
 
-  private val _events = MutableLiveData<List<EventResponse>>()
-  val events: LiveData<List<EventResponse>> = _events
-
-  private val _isLoading = MutableLiveData<Boolean>()
-  val isLoading: LiveData<Boolean> = _isLoading
-
-  private val _snackBarText = MutableLiveData<String>()
-  val snackBarText: LiveData<String> = _snackBarText
+  private val _uiState = MutableLiveData<EventUiState>()
+  val uiState: LiveData<EventUiState> = _uiState
 
   init {
-    getUpcomingEvent()
+    getUpcomingEvents()
   }
 
-  fun getUpcomingEvent() {
-    _snackBarText.value = ""
-    _isLoading.value = true
-
-    val client = EventApiConfig.Companion.getApiService().getAllEvent(1)
-    client.enqueue(object : Callback<ListEventResponse> {
-      override fun onResponse(
-        call: Call<ListEventResponse>,
-        response: Response<ListEventResponse>,
-      ) {
-        _isLoading.value = false
-        if (response.isSuccessful) {
-          val responseBody = response.body()
-          if (responseBody != null && responseBody.listEvents != null) {
-            if (responseBody.listEvents.isEmpty()) {
-              _snackBarText.value = "No Events Found"
+  fun getUpcomingEvents() {
+    viewModelScope.launch {
+      repository.getUpcomingEvents()
+        .collect { result ->
+          _uiState.value = when (result) {
+            is NetworkResult.Loading -> EventUiState.Loading
+            is NetworkResult.Success -> {
+              if (result.data.isEmpty()) {
+                EventUiState.Empty
+              } else {
+                EventUiState.Success(result.data)
+              }
             }
-            _events.value = responseBody.listEvents.filterNotNull()
+            is NetworkResult.Error -> EventUiState.Error(result.message)
           }
-        } else {
-          Log.e(TAG, "onFailure: ${response.message()}")
-          _snackBarText.value = response.message() ?: FAILED
         }
-      }
-
-      override fun onFailure(call: Call<ListEventResponse>, t: Throwable) {
-        _isLoading.value = false
-        Log.e(TAG, "onFailure: ${t.message}")
-        _snackBarText.value = FAILED
-      }
-    })
-  }
-
-  companion object {
-    private const val TAG = "UpcomingEventViewModel"
-    private const val FAILED = "Error: Check your connection and try again"
+    }
   }
 }

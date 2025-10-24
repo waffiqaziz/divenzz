@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
@@ -24,8 +23,6 @@ import com.waffiq.divenzz.R.plurals.quota_left
 import com.waffiq.divenzz.R.string.added_to_favorite
 import com.waffiq.divenzz.R.string.removed_from_favorite
 import com.waffiq.divenzz.core.data.database.EventEntity
-import com.waffiq.divenzz.core.data.datastore.SettingPreferences
-import com.waffiq.divenzz.core.data.datastore.dataStore
 import com.waffiq.divenzz.core.data.remote.response.EventResponse
 import com.waffiq.divenzz.databinding.ActivityDetailBinding
 import com.waffiq.divenzz.ui.favorite.FavoriteViewModel
@@ -43,7 +40,7 @@ class DetailActivity : AppCompatActivity() {
   private lateinit var binding: ActivityDetailBinding
   private var eventId by Delegates.notNull<Int>()
 
-  private val viewModel by viewModels<DetailEventViewModel>()
+  private lateinit var viewModel: DetailEventViewModel
   private lateinit var favViewModel: FavoriteViewModel
 
   private var isFavorite = false
@@ -69,14 +66,13 @@ class DetailActivity : AppCompatActivity() {
     }
     ViewCompat.requestApplyInsets(binding.root)
 
-    val pref = SettingPreferences.getInstance(this.dataStore)
-    favViewModel = ViewModelProvider(
-      this,
-      ViewModelFactory(this.application, pref)
-    )[FavoriteViewModel::class.java]
+    val factory = ViewModelFactory.getInstance(this)
+    viewModel = ViewModelProvider(this, factory)[DetailEventViewModel::class.java]
+    favViewModel = ViewModelProvider(this, factory)[FavoriteViewModel::class.java]
 
     if (getDataExtra()) {
       getDetailEvent(eventId)
+      setupErrorRetry()
 
       binding.swipeRefresh.setOnRefreshListener {
         getDetailEvent(eventId)
@@ -100,70 +96,100 @@ class DetailActivity : AppCompatActivity() {
   private fun getDetailEvent(eventId: Int) {
     viewModel.getDetailEvent(eventId)
 
-    // observe loading states
-    viewModel.isLoading.observe(this) {
-      binding.loading.progressCircular.isVisible = it
-      binding.container.isVisible = !it
-      binding.layoutDetail.isVisible = !it
-      binding.btnRegister.isVisible = !it
-    }
+    viewModel.uiState.observe(this) { state ->
+      when (state) {
+        is DetailEventUiState.Loading -> {
+          binding.loading.progressCircular.isVisible = true
+          binding.container.isVisible = false
+          binding.layoutDetail.isVisible = false
+          binding.btnRegister.isVisible = false
+          binding.splitFab.isVisible = false
+          binding.error.root.isVisible = false
+        }
 
-    // observe error states
-    viewModel.snackBarText.observe(this) {
-      val isError = it.isNotEmpty()
-      binding.container.isVisible = !isError
-      binding.btnRegister.isVisible = !isError
-      binding.error.root.isVisible = isError
-      binding.error.tvErrorMessage.text = it
-      binding.splitFab.isVisible = !isError
-    }
+        is DetailEventUiState.Success -> {
+          event = state.event
+          binding.loading.progressCircular.isVisible = false
+          binding.container.isVisible = true
+          binding.layoutDetail.isVisible = true
+          binding.btnRegister.isVisible = true
+          binding.splitFab.isVisible = true
+          binding.error.root.isVisible = false
 
-    // observe event data
-    viewModel.event.observe(this) { event ->
-      if (event != null) {
-        this.event = event
+          displayEventDetail(state.event)
+        }
 
-        Glide.with(binding.ivPicture)
-          .load(event.mediaCover)
-          .placeholder(ic_image_placeholder)
-          .transition(withCrossFade())
-          .error(ic_image_error_wide)
-          .into(binding.ivPicture)
-
-        val left = (event.quota ?: 0) - (event.registrants ?: 0)
-        val quota = resources.getQuantityString(
-          quota_left,
-          left,
-          event.registrants ?: 0,
-          event.quota ?: 0,
-          left
-        )
-        val date = convertToReadableDateTimeCompat(event.beginTime, event.endTime)
-        val owner = event.ownerName + ", "
-
-        binding.tvOwnerName.text = owner
-        binding.tvEventType.text = event.category
-        binding.tvEventName.text = event.name
-        binding.tvDateDay.text = date.first
-        binding.tvTime.text = date.second
-        binding.tvPlace.text = event.cityName
-        binding.tvQuota.text = quota
-
-        val decodedHtml = event.description?.replace("\\u003C", "<")
-          ?.replace("\\u003E", ">")
-          ?.replace("\\u0026", "&").toString()
-        val markwon = Markwon.builder(this)
-          .usePlugin(HtmlPlugin.create())
-          .usePlugin(GlideImagesPlugin.create(this))
-          .build()
-        markwon.setMarkdown(binding.tvDescription, decodedHtml)
-
-        binding.btnRegister.setOnClickListener {
-          startActivity(Intent(Intent.ACTION_VIEW, event.link?.toUri()))
+        is DetailEventUiState.Error -> {
+          binding.loading.progressCircular.isVisible = false
+          binding.container.isVisible = false
+          binding.layoutDetail.isVisible = false
+          binding.btnRegister.isVisible = false
+          binding.splitFab.isVisible = false
+          binding.error.root.isVisible = true
         }
       }
     }
   }
+
+  private fun setupErrorRetry() {
+    binding.error.btnTryAgain.setOnClickListener {
+      viewModel.retry(eventId)
+    }
+  }
+
+  private fun displayEventDetail(event: EventResponse) {
+    // Load image
+    Glide.with(binding.ivPicture)
+      .load(event.mediaCover)
+      .placeholder(ic_image_placeholder)
+      .transition(withCrossFade())
+      .error(ic_image_error_wide)
+      .into(binding.ivPicture)
+
+    // Calculate quota
+    val left = (event.quota ?: 0) - (event.registrants ?: 0)
+    val quota = resources.getQuantityString(
+      quota_left,
+      left,
+      event.registrants ?: 0,
+      event.quota ?: 0,
+      left
+    )
+
+    // Format date
+    val date = convertToReadableDateTimeCompat(event.beginTime, event.endTime)
+    val owner = event.ownerName + ", "
+
+    // Set text fields
+    binding.tvOwnerName.text = owner
+    binding.tvEventType.text = event.category
+    binding.tvEventName.text = event.name
+    binding.tvDateDay.text = date.first
+    binding.tvTime.text = date.second
+    binding.tvPlace.text = event.cityName
+    binding.tvQuota.text = quota
+
+    // Render description with HTML/Markdown
+    val decodedHtml = event.description
+      ?.replace("\\u003C", "<")
+      ?.replace("\\u003E", ">")
+      ?.replace("\\u0026", "&")
+      .orEmpty()
+
+    val markwon = Markwon.builder(this)
+      .usePlugin(HtmlPlugin.create())
+      .usePlugin(GlideImagesPlugin.create(this))
+      .build()
+    markwon.setMarkdown(binding.tvDescription, decodedHtml)
+
+    // Setup register button
+    binding.btnRegister.setOnClickListener {
+      event.link?.let { link ->
+        startActivity(Intent(Intent.ACTION_VIEW, link.toUri()))
+      }
+    }
+  }
+
 
   private fun btnAction() {
     binding.btnBack.setOnClickListener {

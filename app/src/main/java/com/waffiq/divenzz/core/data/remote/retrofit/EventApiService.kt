@@ -2,7 +2,6 @@ package com.waffiq.divenzz.core.data.remote.retrofit
 
 import com.waffiq.divenzz.core.data.remote.response.DetailEventResponse
 import com.waffiq.divenzz.core.data.remote.response.ListEventResponse
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -10,17 +9,17 @@ import retrofit2.http.Query
 interface EventApiService {
 
   @GET("/events")
-  fun getAllEvent(
+  suspend fun getAllEvent(
     @Query("active") active: Int,
-  ): Call<ListEventResponse>
+  ): ListEventResponse
 
   @GET("/events/{eventId}")
-  fun getEventDetail(
+  suspend fun getDetailEvent(
     @Path("eventId") eventId: Int,
-  ): Call<DetailEventResponse>
+  ): DetailEventResponse
 
   @GET("/events?active=-1")
-  fun search(
+  suspend fun search(
     @Query("q") query: String,
-  ): Call<ListEventResponse>
+  ): ListEventResponse
 }
