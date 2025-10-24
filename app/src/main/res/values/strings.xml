@@ -44,12 +44,25 @@
   <string name="no_results_found_for">No results found for \"%1$s\"</string>
 
   <!-- Settings -->
+  <string name="schedule">Schedule</string>
+  <string name="get_daily_reminder">Get daily reminder</string>
+  <string name="daily_notification">Daily Notification</string>
   <string name="light">Light</string>
   <string name="dark">Dark</string>
   <string name="system">System</string>
   <string name="easy_on_the_eyes">Easy on the eyes</string>
   <string name="dark_theme">Dark Theme</string>
   <string name="appearance">Appearance</string>
+  <string name="test_notification_once">Test Notification (Once)</string>
+  <string name="one_time_test_scheduled">One-time test scheduled</string>
+  <string name="start_periodic_test_15_min">Start Periodic Test (15 min)</string>
+  <string name="periodic_test_started_every_15_min">Periodic test started (every 15 min)</string>
+  <string name="periodic_test_stopped">Periodic test stopped</string>
+  <string name="stop_periodic_test">Stop Periodic Test</string>
+  <string name="notification_permission_is_required">Notification permission is required</string>
+  <string name="daily_notification_disabled">Daily notification disabled</string>
+  <string name="note_check_logcat_for_detailed_logs">Note: Check Logcat for detailed logs</string>
+  <string name="debug_controls">DEBUG CONTROLS</string>
 
   <!-- Favorites -->
   <string name="open_favorite_page">Open Favorite Page</string>
@@ -59,5 +72,6 @@
   <string name="sorry_no_favorites_found">Sorry no favorites found</string>
   <string name="add_events_to_your_favorites_firs">Add events to your favorites first.</string>
   <string name="favorite_events_icon">Favorite Events Icon</string>
+  <string name="daily_notification_enabled_at_7_00_am">Daily notification enabled at 7:00 AM</string>
 
 </resources>

@@ -3,9 +3,11 @@ package com.waffiq.divenzz.utils
 import android.R.anim.fade_in
 import android.R.anim.fade_out
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
@@ -16,6 +18,7 @@ import com.google.android.material.appbar.AppBarLayout
 import com.waffiq.divenzz.ui.detail.DetailActivity
 import com.waffiq.divenzz.ui.favorite.FavoriteActivity
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 object Helpers {
@@ -91,4 +94,21 @@ object Helpers {
   val Activity.isDarkTheme: Boolean
     get() = this.resources.configuration.uiMode and
       Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
+
+  fun Context.showShortToast(text: String) {
+    Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+  }
+
+  fun readableTime(time: Long): String {
+    val date = Date(time)
+    val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+    return format.format(date)
+  }
+
+  fun readableDelay(millis: Long): String {
+    val hours = millis / (1000 * 60 * 60)
+    val minutes = (millis / (1000 * 60)) % 60
+    val seconds = (millis / 1000) % 60
+    return String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds)
+  }
 }
