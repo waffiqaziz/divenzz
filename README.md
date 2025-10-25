@@ -34,9 +34,9 @@ Explore Dicoding events, discover upcoming, and past events with ease
 
 ## 📸 Screenshots
 
-[![Divenzz-Light-v2.png](https://i.postimg.cc/MHqtQNJL/Divenzz-Light-v2.png)](https://postimg.cc/k6Yxrj4N)
+[![Divenzz-Light-v3.png](https://i.postimg.cc/FKfDKF8K/Divenzz-Light-v3.png)](https://postimg.cc/cKSQ9Wsq)
 
-[![Divenzz-Dark-v2.png](https://i.postimg.cc/DydkR3zv/Divenzz-Dark-v2.png)](https://postimg.cc/D8ZMbDsH)
+[![Divenzz-Dark-v3.png](https://i.postimg.cc/QCg6r6PR/Divenzz-Dark-v3.png)](https://postimg.cc/bSJ0xRqT)
 
 ## 🚀 Getting Started
 
