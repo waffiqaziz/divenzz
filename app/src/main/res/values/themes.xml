@@ -59,7 +59,7 @@
     <item name="cornerSize">@dimen/corner_radius</item>
   </style>
 
-  <style name="CardTitleItemStyle">
+  <style name="DetailCardTitleItemStyle">
     <item name="android:letterSpacing">0.08</item>
     <item name="android:textAllCaps">true</item>
     <item name="android:fontFamily">@font/nunito_sans_bold</item>
@@ -69,14 +69,14 @@
     <item name="android:textAppearance">@style/TextAppearance.Material3.BodySmall</item>
   </style>
 
-  <style name="CardItemStyle">
+  <style name="DetailCardItemStyle">
     <item name="android:layout_height">wrap_content</item>
     <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_marginTop">@dimen/item_card_margin</item>
     <item name="android:textAppearance">@style/TextAppearance.Material3.LabelSmall</item>
   </style>
 
-  <style name="CardItemLayoutStyle">
+  <style name="DetailCardItemLayoutStyle">
     <item name="android:layout_weight">1</item>
     <item name="android:layout_height">wrap_content</item>
     <item name="android:layout_width">0dp</item>
@@ -158,7 +158,7 @@
     <item name="android:layout_weight">1</item>
     <item name="android:textAllCaps">true</item>
     <item name="android:textAppearance">@style/TextAppearance.Material3.BodySmall</item>
-    <item name="cornerRadius">8dp</item>
+    <item name="cornerRadius">@dimen/corner_radius</item>
     <item name="strokeColor">?attr/colorPrimary</item>
     <item name="strokeWidth">1dp</item>
   </style>
