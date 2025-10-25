@@ -132,29 +132,29 @@
 
               <!-- DATE -->
               <LinearLayout
-                style="@style/CardItemLayoutStyle"
+                style="@style/DetailCardItemLayoutStyle"
                 android:layout_marginEnd="@dimen/margin">
 
                 <TextView
-                  style="@style/CardTitleItemStyle"
+                  style="@style/DetailCardTitleItemStyle"
                   android:text="@string/date" />
 
                 <TextView
                   android:id="@+id/tv_date_day"
-                  style="@style/CardItemStyle"
+                  style="@style/DetailCardItemStyle"
                   tools:text="Friday, Aug 17 2025" />
               </LinearLayout>
 
               <!-- TIME -->
-              <LinearLayout style="@style/CardItemLayoutStyle">
+              <LinearLayout style="@style/DetailCardItemLayoutStyle">
 
                 <TextView
-                  style="@style/CardTitleItemStyle"
+                  style="@style/DetailCardTitleItemStyle"
                   android:text="@string/time" />
 
                 <TextView
                   android:id="@+id/tv_time"
-                  style="@style/CardItemStyle"
+                  style="@style/DetailCardItemStyle"
                   tools:text="6:00 - 8:00 PM" />
               </LinearLayout>
             </LinearLayout>
@@ -173,29 +173,29 @@
 
               <!-- LOCATION -->
               <LinearLayout
-                style="@style/CardItemLayoutStyle"
+                style="@style/DetailCardItemLayoutStyle"
                 android:layout_marginEnd="@dimen/margin">
 
                 <TextView
-                  style="@style/CardTitleItemStyle"
+                  style="@style/DetailCardTitleItemStyle"
                   android:text="@string/location" />
 
                 <TextView
                   android:id="@+id/tv_place"
-                  style="@style/CardItemStyle"
+                  style="@style/DetailCardItemStyle"
                   tools:text="Online" />
               </LinearLayout>
 
               <!-- QUOTA -->
-              <LinearLayout style="@style/CardItemLayoutStyle">
+              <LinearLayout style="@style/DetailCardItemLayoutStyle">
 
                 <TextView
-                  style="@style/CardTitleItemStyle"
+                  style="@style/DetailCardTitleItemStyle"
                   android:text="@string/quota" />
 
                 <TextView
                   android:id="@+id/tv_quota"
-                  style="@style/CardItemStyle"
+                  style="@style/DetailCardItemStyle"
                   tools:text="386/1000" />
 
               </LinearLayout>

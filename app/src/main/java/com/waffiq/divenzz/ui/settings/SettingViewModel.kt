@@ -17,4 +17,12 @@ class SettingViewModel(private val pref: SettingPreferences) : ViewModel() {
       pref.saveThemeSetting(themeMode)
     }
   }
+
+  fun setNotificationEnabled(isEnabled: Boolean) {
+    viewModelScope.launch {
+      pref.setNotificationEnabled(isEnabled)
+    }
+  }
+
+  val isNotificationEnabled: Flow<Boolean> = pref.isNotificationEnabled()
 }

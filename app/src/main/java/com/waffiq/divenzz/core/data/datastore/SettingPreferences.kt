@@ -2,6 +2,7 @@ package com.waffiq.divenzz.core.data.datastore
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.waffiq.divenzz.utils.ThemeMode
@@ -23,14 +24,24 @@ class SettingPreferences private constructor(private val dataStore: DataStore<Pr
     }
   }
 
-  companion object{
+  fun isNotificationEnabled(): Flow<Boolean> =
+    dataStore.data.map { it[SCHEDULE_KEY] ?: false }
+
+  suspend fun setNotificationEnabled(isEnabled: Boolean) {
+    dataStore.edit { preferences ->
+      preferences[SCHEDULE_KEY] = isEnabled
+    }
+  }
+
+  companion object {
     val THEME_KEY = stringPreferencesKey("theme_mode")
+    val SCHEDULE_KEY = booleanPreferencesKey("schedule_key")
 
     @Volatile
     private var INSTANCE: SettingPreferences? = null
 
     fun getInstance(dataStore: DataStore<Preferences>): SettingPreferences {
-      return INSTANCE ?: synchronized(this){
+      return INSTANCE ?: synchronized(this) {
         val instance = SettingPreferences(dataStore)
         INSTANCE = instance
         instance

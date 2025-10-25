@@ -56,6 +56,8 @@ dependencies {
   implementation(libs.androidx.navigation.fragment.ktx)
   implementation(libs.androidx.navigation.ui.ktx)
   implementation(libs.androidx.swiperefreshlayout)
+  implementation(libs.androidx.work.runtime.ktx)
+  implementation(libs.android.async.http)
   implementation(libs.material)
 
   implementation(libs.markwon.core)

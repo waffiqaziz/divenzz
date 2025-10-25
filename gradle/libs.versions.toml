@@ -10,7 +10,7 @@ versionName = "1.0.0-dev"
 
 # Plugin Versions
 agp = "8.13.0"
-kotlin = "2.2.20"
+kotlin = "2.2.21"
 coreKtx = "1.17.0"
 ksp = "2.2.20-2.0.4"
 
@@ -27,9 +27,11 @@ lifecycleViewmodelKtx = "2.9.4"
 navigationFragmentKtx = "2.9.5"
 navigationUiKtx = "2.9.5"
 swiperefreshlayout = "1.2.0-beta01"
+workRuntimeKtx = "2.11.0"
+androidAsyncHttp = "1.4.11"
 
 datastore = "1.1.7"
-room = "2.8.2"
+room = "2.8.3"
 
 # Networking
 retrofit = "3.0.0"
@@ -56,6 +58,8 @@ androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifec
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
+androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workRuntimeKtx" }
+android-async-http = { module = "com.loopj.android:android-async-http", version.ref = "androidAsyncHttp" }
 
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 
