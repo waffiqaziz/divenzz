@@ -1,8 +1,5 @@
 package com.waffiq.divenzz.ui.settings
 
-import com.waffiq.divenzz.R.drawable.ic_notification_icon
-import com.waffiq.divenzz.MainActivity
-import com.waffiq.divenzz.core.data.remote.retrofit.EventApiConfig
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -16,13 +13,16 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.bumptech.glide.Glide
 import com.waffiq.divenzz.BuildConfig
+import com.waffiq.divenzz.MainActivity
+import com.waffiq.divenzz.R.drawable.ic_notification_icon
+import com.waffiq.divenzz.core.data.remote.retrofit.EventApiConfig
 import com.waffiq.divenzz.utils.Helpers.convertToReadableDateTimeCompat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class DailyReminderWorkerCoroutine(
   context: Context,
-  workerParams: WorkerParameters
+  workerParams: WorkerParameters,
 ) : CoroutineWorker(context, workerParams) {
 
   override suspend fun doWork(): Result {
@@ -42,7 +42,7 @@ class DailyReminderWorkerCoroutine(
         if (firstEvent != null) {
           logDebug("Showing notification for event: ${firstEvent.name}")
 
-          val date  = convertToReadableDateTimeCompat(firstEvent.beginTime, firstEvent.endTime)
+          val date = convertToReadableDateTimeCompat(firstEvent.beginTime, firstEvent.endTime)
 
           showNotification(
             title = firstEvent.name ?: "Event Reminder",
@@ -71,7 +71,8 @@ class DailyReminderWorkerCoroutine(
   }
 
   private fun showNotification(title: String, message: String, url: String) {
-    val notificationManager = applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    val notificationManager =
+      applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     val channelId = "daily_reminder_channel"
     val channelName = "Daily Reminder"
 
@@ -116,12 +117,14 @@ class DailyReminderWorkerCoroutine(
       .setContentIntent(pendingIntent)
       .setAutoCancel(true)
       .setLargeIcon(myBitmap)
-      .setStyle(NotificationCompat.BigPictureStyle()
-        .bigPicture(myBitmap)
-        .bigLargeIcon(null as Bitmap?))
+      .setStyle(
+        NotificationCompat.BigPictureStyle()
+          .bigPicture(myBitmap)
+          .bigLargeIcon(null as Bitmap?)
+      )
       .build()
 
-    notificationManager.notify(NOTIFICATION_ID, notification)
+    notificationManager.notify(COROUTINE_NOTIFICATION_ID, notification)
     logDebug("Notification displayed")
   }
 
@@ -133,6 +136,6 @@ class DailyReminderWorkerCoroutine(
 
   companion object {
     private const val TAG = "DailyReminderWorker"
-    private const val NOTIFICATION_ID = 234123
+    const val COROUTINE_NOTIFICATION_ID = 234123
   }
 }

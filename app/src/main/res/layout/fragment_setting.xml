@@ -10,9 +10,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="wrap_content">
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
 
       <Space
         android:id="@+id/top_space"
@@ -23,52 +24,88 @@
         app:layout_constraintTop_toTopOf="parent" />
 
       <TextView
-        android:id="@+id/tv_schedule_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/nunito_sans_bold"
-        android:letterSpacing="0.1"
-        android:text="@string/schedule"
-        android:textAllCaps="true"
-        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
-        android:textColor="?attr/colorPrimary"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/top_space" />
+        style="@style/SettingsTextHeaderStyle"
+        android:text="@string/schedule" />
 
-      <FrameLayout
-        android:id="@+id/notification_container"
-        android:layout_width="0dp"
-        android:layout_height="88dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
+      <LinearLayout
+        style="@style/SettingsCardStyle"
+        android:baselineAligned="false">
+
+        <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_weight="1"
+          android:orientation="vertical">
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/daily_notification"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/get_daily_reminder"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <FrameLayout
+          android:layout_width="60dp"
+          android:layout_height="wrap_content"
+          android:background="@drawable/bg_switch_area"
+          android:gravity="center">
+
+          <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch_notification"
+            style="@style/SwitchStyle" />
+
+        </FrameLayout>
+      </LinearLayout>
+
+      <!-- Debug Section - Only visible in debug builds -->
+      <TextView
+        android:id="@+id/tv_debug_header"
+        style="@style/SettingsTextHeaderStyle"
+        android:text="@string/debug_controls"
+        android:textColor="?attr/colorError"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+      <LinearLayout
+        android:id="@+id/debug_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_card"
+        android:layout_marginTop="@dimen/margin"
         android:background="@drawable/bg_theme_container"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_schedule_header">
+        android:orientation="vertical"
+        android:padding="@dimen/padding_card"
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <LinearLayout
           android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:baselineAligned="false"
-          android:gravity="center_vertical"
-          android:orientation="horizontal"
-          android:paddingStart="20dp"
-          android:paddingEnd="16dp">
+          android:layout_height="wrap_content"
+          android:baselineAligned="false">
 
           <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="@string/daily_notification"
+              android:text="@string/daily_notification_use_worker_only"
               android:textColor="?attr/colorOnSurface"
               android:textSize="15sp"
               android:textStyle="bold" />
@@ -77,7 +114,7 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_marginTop="4dp"
-              android:text="@string/get_daily_reminder"
+              android:text="@string/only_works_if_the_app_not_closed"
               android:textColor="?attr/colorOnSurfaceVariant"
               android:textSize="12sp" />
 
@@ -90,58 +127,18 @@
             android:gravity="center">
 
             <com.google.android.material.switchmaterial.SwitchMaterial
-              android:id="@+id/switch_notification"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_gravity="center"
-              android:paddingVertical="@dimen/short_margin"
-              app:thumbTint="?attr/colorPrimaryInverse"
-              app:trackTint="?attr/colorPrimaryContainer" />
+              android:id="@+id/switch_notification_debug"
+              style="@style/SwitchStyle" />
 
           </FrameLayout>
         </LinearLayout>
-      </FrameLayout>
-
-      <!-- Debug Section - Only visible in debug builds -->
-      <TextView
-        android:id="@+id/tv_debug_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/nunito_sans_bold"
-        android:letterSpacing="0.1"
-        android:text="@string/debug_controls"
-        android:textAllCaps="true"
-        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
-        android:textColor="?attr/colorError"
-        android:textSize="12sp"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/notification_container"
-        tools:visibility="visible" />
-
-      <LinearLayout
-        android:id="@+id/debug_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/bg_theme_container"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_debug_header"
-        tools:visibility="visible">
 
         <com.google.android.material.button.MaterialButton
           android:id="@+id/btn_test_once"
           style="@style/Widget.Material3.Button.ElevatedButton"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/margin"
           android:text="@string/test_notification_once"
           android:textAllCaps="false"
           app:icon="@drawable/ic_send" />
@@ -151,7 +148,7 @@
           style="@style/Widget.Material3.Button.ElevatedButton"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginTop="8dp"
+          android:layout_marginTop="@dimen/short_margin"
           android:text="@string/start_periodic_test_15_min"
           android:textAllCaps="false"
           app:icon="@drawable/ic_clock" />
@@ -161,7 +158,7 @@
           style="@style/Widget.Material3.Button.TonalButton"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginTop="8dp"
+          android:layout_marginTop="@dimen/short_margin"
           android:text="@string/stop_periodic_test"
           android:textAllCaps="false"
           app:icon="@drawable/ic_cross" />
@@ -178,153 +175,90 @@
       </LinearLayout>
 
       <TextView
-        android:id="@+id/tv_appearance_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/nunito_sans_bold"
-        android:letterSpacing="0.1"
-        android:text="@string/appearance"
-        android:textAllCaps="true"
-        android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
-        android:textColor="?attr/colorPrimary"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/debug_container" />
+        style="@style/SettingsTextHeaderStyle"
+        android:text="@string/appearance" />
 
       <!-- Theme Toggle Container -->
-      <FrameLayout
-        android:id="@+id/theme_container"
-        android:layout_width="0dp"
-        android:layout_height="88dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/bg_theme_container"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_appearance_title">
+      <LinearLayout
+        style="@style/SettingsCardStyle"
+        android:baselineAligned="false">
 
         <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:baselineAligned="false"
-          android:gravity="center_vertical"
-          android:orientation="horizontal"
-          android:paddingStart="20dp"
-          android:paddingEnd="16dp">
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:orientation="vertical">
 
-          <LinearLayout
-            android:layout_width="0dp"
+          <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:fontFamily="@font/nunito_sans_bold"
+            android:text="@string/dark_theme"
+            android:textAppearance="@style/TextAppearance.Material3.TitleSmall" />
 
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="@string/dark_theme"
-              android:textColor="?attr/colorOnSurface"
-              android:textSize="15sp"
-              android:textStyle="bold" />
-
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_marginTop="4dp"
-              android:text="@string/easy_on_the_eyes"
-              android:textColor="?attr/colorOnSurfaceVariant"
-              android:textSize="12sp" />
-
-          </LinearLayout>
-
-          <FrameLayout
-            android:layout_width="60dp"
+          <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_switch_area"
-            android:gravity="center">
+            android:layout_marginTop="4dp"
+            android:text="@string/easy_on_the_eyes"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="12sp" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
-              android:id="@+id/switch_theme"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_gravity="center"
-              android:paddingVertical="@dimen/short_margin"
-              app:thumbTint="?attr/colorPrimaryInverse"
-              app:trackTint="?attr/colorPrimaryContainer" />
-
-          </FrameLayout>
         </LinearLayout>
-      </FrameLayout>
+
+        <FrameLayout
+          android:layout_width="60dp"
+          android:layout_height="wrap_content"
+          android:background="@drawable/bg_switch_area"
+          android:gravity="center">
+
+          <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch_theme"
+            style="@style/SwitchStyle" />
+
+        </FrameLayout>
+      </LinearLayout>
 
       <com.google.android.material.divider.MaterialDivider
         android:id="@+id/divider"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:alpha="0.2"
-        android:background="?attr/colorOutline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/theme_container" />
+        android:background="?attr/colorOutline" />
 
       <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingBottom="200dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider">
+        android:paddingBottom="200dp">
 
         <com.google.android.material.button.MaterialButton
           android:id="@+id/btn_system"
-          style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-          android:layout_width="0dp"
-          android:layout_height="44dp"
+          style="@style/ButtonThemesStyle"
           android:layout_marginEnd="8dp"
-          android:layout_weight="1"
-          android:text="@string/system"
-          android:textSize="12sp"
-          app:cornerRadius="8dp"
-          app:strokeColor="?attr/colorPrimary"
-          app:strokeWidth="1dp" />
+          android:text="@string/system" />
 
         <com.google.android.material.button.MaterialButton
           android:id="@+id/btn_light"
-          style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-          android:layout_width="0dp"
-          android:layout_height="44dp"
+          style="@style/ButtonThemesStyle"
           android:layout_marginStart="4dp"
           android:layout_marginEnd="4dp"
-          android:layout_weight="1"
-          android:text="@string/light"
-          android:textSize="12sp"
-          app:cornerRadius="8dp"
-          app:strokeColor="?attr/colorPrimary"
-          app:strokeWidth="1dp" />
+          android:text="@string/light" />
 
         <com.google.android.material.button.MaterialButton
           android:id="@+id/btn_dark"
-          style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-          android:layout_width="0dp"
-          android:layout_height="44dp"
+          style="@style/ButtonThemesStyle"
           android:layout_marginStart="8dp"
-          android:layout_weight="1"
-          android:text="@string/dark"
-          android:textSize="12sp"
-          app:cornerRadius="8dp"
-          app:strokeColor="?attr/colorPrimary"
-          app:strokeWidth="1dp" />
+          android:text="@string/dark" />
 
       </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
   </ScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

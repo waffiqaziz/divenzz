@@ -1,4 +1,5 @@
 <resources>
+
   <style name="Theme.Divenzz" parent="Theme.Material3.Light.NoActionBar">
     <item name="colorPrimary">@color/md_theme_primary</item>
     <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
@@ -92,7 +93,7 @@
     <item name="android:outlineProvider">background</item>
   </style>
 
-  <style name="ToolbarTitleStyle" >
+  <style name="ToolbarTitleStyle">
     <item name="android:layout_height">wrap_content</item>
     <item name="android:layout_width">wrap_content</item>
     <item name="android:fontFamily">@font/nunito_sans_bold</item>
@@ -101,7 +102,7 @@
     <item name="android:textColor">?attr/colorPrimary</item>
   </style>
 
-  <style name="ToolbarTextStyle" >
+  <style name="ToolbarTextStyle">
     <item name="android:layout_height">wrap_content</item>
     <item name="android:layout_width">wrap_content</item>
     <item name="android:textAppearance">@style/TextAppearance.Material3.BodySmall</item>
@@ -124,6 +125,52 @@
     <item name="windowSplashScreenBackground">@color/md_theme_onSecondaryFixed</item>
     <item name="windowSplashScreenAnimationDuration">300</item>
     <item name="postSplashScreenTheme">@style/Theme.Divenzz</item>
+  </style>
+
+  <style name="SettingsTextHeaderStyle">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:fontFamily">@font/nunito_sans_bold</item>
+    <item name="android:textAllCaps">true</item>
+    <item name="android:letterSpacing">0.1</item>
+    <item name="android:layout_marginTop">@dimen/margin_card</item>
+    <item name="android:layout_marginStart">24dp</item>
+    <item name="android:textAppearance">@style/TextAppearance.Material3.BodySmall</item>
+    <item name="android:textColor">?attr/colorPrimary</item>
+  </style>
+
+  <style name="SettingsCardStyle">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">88dp</item>
+    <item name="android:layout_marginTop">@dimen/margin</item>
+    <item name="android:layout_marginStart">@dimen/margin_card</item>
+    <item name="android:layout_marginEnd">@dimen/margin_card</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:orientation">horizontal</item>
+    <item name="android:paddingEnd">@dimen/margin_card</item>
+    <item name="android:paddingStart">@dimen/margin_card</item>
+    <item name="android:background">@drawable/bg_theme_container</item>
+  </style>
+
+  <style name="ButtonThemesStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">44dp</item>
+    <item name="android:layout_weight">1</item>
+    <item name="android:textAllCaps">true</item>
+    <item name="android:textAppearance">@style/TextAppearance.Material3.BodySmall</item>
+    <item name="cornerRadius">8dp</item>
+    <item name="strokeColor">?attr/colorPrimary</item>
+    <item name="strokeWidth">1dp</item>
+  </style>
+
+  <style name="SwitchStyle">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_gravity">center</item>
+    <item name="android:paddingBottom">@dimen/short_margin</item>
+    <item name="android:paddingTop">@dimen/short_margin</item>
+    <item name="thumbTint">?attr/colorPrimaryInverse</item>
+    <item name="trackTint">?attr/colorPrimaryContainer</item>
   </style>
 
 </resources>

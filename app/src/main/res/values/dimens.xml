@@ -1,5 +1,6 @@
 <resources>
   <dimen name="margin">12dp</dimen>
+  <dimen name="margin_card">16dp</dimen>
   <dimen name="short_margin">8dp</dimen>
   <dimen name="tiny_margin">4dp</dimen>
   <dimen name="item_card_margin">6dp</dimen>
@@ -7,4 +8,5 @@
   <dimen name="rv_padding">140dp</dimen>
   <dimen name="padding_top_bar">48dp</dimen>
   <dimen name="bottom_nav_height">86dp</dimen>
+  <dimen name="padding_card">20dp</dimen>
 </resources>

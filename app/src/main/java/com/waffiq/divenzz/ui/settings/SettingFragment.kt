@@ -13,6 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -60,10 +61,8 @@ class SettingFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
 
     // show debug controls only in debug build
-    if (BuildConfig.DEBUG) {
-      binding.tvDebugHeader.visibility = View.VISIBLE
-      binding.debugContainer.visibility = View.VISIBLE
-    }
+    binding.tvDebugHeader.isVisible = BuildConfig.DEBUG
+    binding.debugContainer.isVisible = BuildConfig.DEBUG
 
     lifecycleScope.launch {
       viewModel.themeSettings.debounce(350L).collect {
@@ -128,27 +127,53 @@ class SettingFragment : Fragment() {
         if (isChecked) {
           requestNotificationPermissionIfNeeded { granted ->
             if (granted) {
-              enableNotification()
+              // enable notification
+              NotificationScheduler.scheduleDailyNotificationAlarm(requireContext())
+              viewModel.setNotificationEnabled(true)
               requireActivity().showShortToast(getString(daily_notification_enabled_at_7_00_am))
             } else {
               binding.switchNotification.isChecked = false
             }
           }
         } else {
-          disableNotification()
+          // disable notification
+          NotificationScheduler.cancelDailyNotificationAlarm(requireContext())
+          viewModel.setNotificationEnabled(false)
           requireActivity().showShortToast(getString(daily_notification_disabled))
         }
       }
     }
 
     if (BuildConfig.DEBUG) {
+      binding.switchNotificationDebug.setOnCheckedChangeListener { _, isChecked ->
+        if (binding.switchNotificationDebug.isPressed) {
+          if (isChecked) {
+            requestNotificationPermissionIfNeeded { granted ->
+              if (granted) {
+                // enable notification
+                NotificationScheduler.scheduleDailyNotificationWorker(requireContext())
+                viewModel.setNotificationEnabled(true)
+                requireActivity().showShortToast(getString(daily_notification_enabled_at_7_00_am))
+              } else {
+                binding.switchNotificationDebug.isChecked = false
+              }
+            }
+          } else {
+            // disable notification
+            NotificationScheduler.cancelDailyNotificationWorker(requireContext())
+            viewModel.setNotificationEnabled(false)
+            requireActivity().showShortToast(getString(daily_notification_disabled))
+          }
+        }
+      }
+
       // test once
       binding.btnTestOnce.setOnClickListener {
         requestNotificationPermissionIfNeeded { granted ->
           if (granted) {
             NotificationScheduler.scheduleOneTimeNotification(requireContext())
             requireActivity().showShortToast(getString(one_time_test_scheduled))
-            Log.i(TAG, "One-time test triggered by user")
+            Log.i(TAG, "One-time test triggered")
           }
         }
       }
@@ -159,7 +184,7 @@ class SettingFragment : Fragment() {
           if (granted) {
             NotificationScheduler.scheduleDebugPeriodicNotification(requireContext())
             requireContext().showShortToast(getString(periodic_test_started_every_15_min))
-            Log.i(TAG, "Periodic test started by user")
+            Log.i(TAG, "Periodic test started")
           }
         }
       }
@@ -167,7 +192,7 @@ class SettingFragment : Fragment() {
       binding.btnStopPeriodic.setOnClickListener {
         NotificationScheduler.cancelDebugPeriodicNotification(requireContext())
         requireActivity().showShortToast(getString(periodic_test_stopped))
-        Log.i(TAG, "Periodic test stopped by user")
+        Log.i(TAG, "Periodic test stopped")
       }
     }
   }
@@ -221,16 +246,6 @@ class SettingFragment : Fragment() {
     if (!isGranted) {
       requireActivity().showShortToast(getString(notification_permission_is_required))
     }
-  }
-
-  private fun enableNotification() {
-    NotificationScheduler.scheduleDailyNotification(requireContext())
-    viewModel.setNotificationEnabled(true)
-  }
-
-  private fun disableNotification() {
-    NotificationScheduler.cancelDailyNotification(requireContext())
-    viewModel.setNotificationEnabled(false)
   }
 
   override fun onDestroyView() {
