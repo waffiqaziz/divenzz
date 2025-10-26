@@ -26,6 +26,7 @@ Explore Dicoding events, discover upcoming, and past events with ease
 - Save favorite on local storage
 - View detailed event information
 - Dark and light mode support
+- Event daily notifications
 
 ## 🛠️ Tech Stack
 
