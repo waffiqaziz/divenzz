@@ -29,7 +29,7 @@ import com.waffiq.divenzz.utils.Helpers.openFavoritePage
 class HomeFragment : Fragment() {
 
   private var _binding: FragmentHomeBinding? = null
-  private val binding get() = _binding!!
+  private val binding get() = _binding ?: error("FragmentHomeBinding is null")
 
   private lateinit var viewModelUpcoming: UpcomingEventViewModel
   private lateinit var viewModelPast: PastEventViewModel
@@ -72,14 +72,16 @@ class HomeFragment : Fragment() {
     eventAdapterVertical = SmallEventAdapter(::onClick)
     eventAdapterHorizontal = EventAdapter(::onClick)
 
-    binding.rvEventsVertical.layoutManager =
-      LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-    binding.rvEventsHorizontal.layoutManager =
-      LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-    LinearSnapHelper().attachToRecyclerView(binding.rvEventsHorizontal)
+    binding.apply {
+      rvEventsVertical.layoutManager =
+        LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+      rvEventsHorizontal.layoutManager =
+        LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+      LinearSnapHelper().attachToRecyclerView(rvEventsHorizontal)
 
-    binding.rvEventsVertical.adapter = eventAdapterVertical
-    binding.rvEventsHorizontal.adapter = eventAdapterHorizontal
+      rvEventsVertical.adapter = eventAdapterVertical
+      rvEventsHorizontal.adapter = eventAdapterHorizontal
+    }
   }
 
   private fun onClick(event: EventResponse) {
@@ -91,43 +93,51 @@ class HomeFragment : Fragment() {
     viewModelUpcoming.uiState.observe(viewLifecycleOwner) { state ->
       when (state) {
         is EventUiState.Loading -> {
-          binding.divider1.isVisible = false
-          binding.divider2.isVisible = false
-          binding.tvUpcomingEvents.isVisible = false
-          binding.tvPastEvents.isVisible = false
-          binding.loading.progressCircular.isVisible = true
-          binding.error.root.isVisible = false
-          binding.rvEventsHorizontal.isVisible = false
+          binding.apply {
+            divider1.isVisible = false
+            divider2.isVisible = false
+            tvUpcomingEvents.isVisible = false
+            tvPastEvents.isVisible = false
+            loading.progressCircular.isVisible = true
+            error.root.isVisible = false
+            rvEventsHorizontal.isVisible = false
+          }
         }
 
         is EventUiState.Success -> {
-          binding.divider1.isVisible = true
-          binding.divider2.isVisible = true
-          binding.tvUpcomingEvents.isVisible = true
-          binding.tvPastEvents.isVisible = true
-          binding.loading.progressCircular.isVisible = false
-          binding.error.root.isVisible = false
-          binding.rvEventsHorizontal.isVisible = true
+          binding.apply {
+            divider1.isVisible = true
+            divider2.isVisible = true
+            tvUpcomingEvents.isVisible = true
+            tvPastEvents.isVisible = true
+            loading.progressCircular.isVisible = false
+            error.root.isVisible = false
+            rvEventsHorizontal.isVisible = true
+          }
           eventAdapterHorizontal.setEvent(state.events)
         }
 
         is EventUiState.Error -> {
-          binding.divider1.isVisible = false
-          binding.divider2.isVisible = false
-          binding.tvUpcomingEvents.isVisible = false
-          binding.tvPastEvents.isVisible = false
-          binding.loading.progressCircular.isVisible = false
-          binding.error.root.isVisible = true
-          binding.rvEventsHorizontal.isVisible = false
+          binding.apply {
+            divider1.isVisible = false
+            divider2.isVisible = false
+            tvUpcomingEvents.isVisible = false
+            tvPastEvents.isVisible = false
+            loading.progressCircular.isVisible = false
+            error.root.isVisible = true
+            rvEventsHorizontal.isVisible = false
+          }
         }
 
         is EventUiState.Empty -> {
-          binding.tvUpcomingEvents.isVisible = false
-          binding.tvPastEvents.isVisible = false
-          binding.loading.progressCircular.isVisible = false
-          binding.error.root.isVisible = true
-          binding.rvEventsHorizontal.isVisible = false
-          binding.error.tvErrorMessage.text = getString(no_past_events_found)
+          binding.apply {
+            tvUpcomingEvents.isVisible = false
+            tvPastEvents.isVisible = false
+            loading.progressCircular.isVisible = false
+            error.root.isVisible = true
+            rvEventsHorizontal.isVisible = false
+            error.tvErrorMessage.text = getString(no_past_events_found)
+          }
         }
       }
     }

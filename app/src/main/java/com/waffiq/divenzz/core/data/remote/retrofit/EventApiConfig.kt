@@ -2,12 +2,12 @@ package com.waffiq.divenzz.core.data.remote.retrofit
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import com.waffiq.divenzz.utils.Constant.BASE_URL
+import com.waffiq.divenzz.BuildConfig
+import com.waffiq.divenzz.BuildConfig.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import com.waffiq.divenzz.BuildConfig
 
 class EventApiConfig {
 

@@ -18,6 +18,8 @@ android {
     versionName = libs.versions.versionName.get()
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+    buildConfigField("String", "BASE_URL", "\"https://event-api.dicoding.dev/\"")
   }
 
   buildTypes {

@@ -37,7 +37,7 @@ import kotlinx.coroutines.launch
 class SettingFragment : Fragment() {
 
   private var _binding: FragmentSettingBinding? = null
-  private val binding get() = _binding!!
+  private val binding get() = _binding ?: error("FragmentSettingBinding is null")
 
   private lateinit var viewModel: SettingViewModel
 
@@ -211,9 +211,11 @@ class SettingFragment : Fragment() {
 
   private fun clearButtonHighlights() {
     val defaultColor = Color.TRANSPARENT // or your default button color
-    binding.btnSystem.setBackgroundColor(defaultColor)
-    binding.btnLight.setBackgroundColor(defaultColor)
-    binding.btnDark.setBackgroundColor(defaultColor)
+    binding.apply {
+      btnSystem.setBackgroundColor(defaultColor)
+      btnLight.setBackgroundColor(defaultColor)
+      btnDark.setBackgroundColor(defaultColor)
+    }
   }
 
   private fun requestNotificationPermissionIfNeeded(onResult: (Boolean) -> Unit) {

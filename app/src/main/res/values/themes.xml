@@ -76,13 +76,6 @@
     <item name="android:textAppearance">@style/TextAppearance.Material3.LabelSmall</item>
   </style>
 
-  <style name="DetailCardItemLayoutStyle">
-    <item name="android:layout_weight">1</item>
-    <item name="android:layout_height">wrap_content</item>
-    <item name="android:layout_width">0dp</item>
-    <item name="android:orientation">vertical</item>
-  </style>
-
   <style name="ToolbarStyle" parent="ThemeOverlay.Material3.Toolbar.Surface">
     <item name="android:layout_height">wrap_content</item>
     <item name="android:layout_width">match_parent</item>

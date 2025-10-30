@@ -14,7 +14,15 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat.CONSUMED
 import androidx.core.view.WindowInsetsCompat.Type
 import androidx.core.view.updateLayoutParams
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.imageview.ShapeableImageView
+import com.waffiq.divenzz.R.drawable.ic_image_broken
+import com.waffiq.divenzz.R.drawable.ic_image_error_wide
+import com.waffiq.divenzz.R.drawable.ic_image_placeholder
+import com.waffiq.divenzz.ui.customview.AspectRatioImageView
 import com.waffiq.divenzz.ui.detail.DetailActivity
 import com.waffiq.divenzz.ui.favorite.FavoriteActivity
 import java.text.SimpleDateFormat
@@ -61,8 +69,8 @@ object Helpers {
     val dateFormat = SimpleDateFormat("EEEE, MMM d yyyy", Locale.ENGLISH)
     val timeFormat = SimpleDateFormat("h:mm a", Locale.ENGLISH)
 
-    val beginDate = inputFormat.parse(beginTime)!!
-    val endDate = inputFormat.parse(endTime)!!
+    val beginDate = inputFormat.parse(beginTime) ?: ""
+    val endDate = inputFormat.parse(endTime) ?: ""
 
     val dateString = dateFormat.format(beginDate)
     val timeRange = "${timeFormat.format(beginDate)} - ${timeFormat.format(endDate)}"
@@ -110,5 +118,24 @@ object Helpers {
     val minutes = (millis / (1000 * 60)) % 60
     val seconds = (millis / 1000) % 60
     return String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds)
+  }
+
+  fun AspectRatioImageView.loadImage(url: String?) {
+    Glide.with(this.context)
+      .load(url)
+      .placeholder(ic_image_placeholder)
+      .transition(withCrossFade())
+      .error(ic_image_error_wide)
+      .into(this)
+  }
+
+  fun ShapeableImageView.loadImage(url: String?) {
+    Glide.with(this.context)
+      .load(url)
+      .placeholder(ic_image_placeholder)
+      .error(ic_image_broken)
+      .transform(CenterCrop())
+      .transition(withCrossFade())
+      .into(this)
   }
 }

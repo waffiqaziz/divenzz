@@ -4,14 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
-import com.waffiq.divenzz.R.drawable.ic_image_broken
-import com.waffiq.divenzz.R.drawable.ic_image_placeholder
 import com.waffiq.divenzz.core.data.remote.response.EventResponse
 import com.waffiq.divenzz.databinding.ItemSmallEventBinding
 import com.waffiq.divenzz.utils.Helpers.convertToReadableDateTimeCompat
+import com.waffiq.divenzz.utils.Helpers.loadImage
 
 class SmallEventAdapter(
   private val onClick: (EventResponse) -> Unit,
@@ -41,19 +37,15 @@ class SmallEventAdapter(
     fun onBind(event: EventResponse) {
       val date = convertToReadableDateTimeCompat(event.beginTime, event.endTime)
 
-      Glide.with(binding.root.context)
-        .load(event.imageLogo)
-        .placeholder(ic_image_placeholder)
-        .error(ic_image_broken)
-        .transform(CenterCrop())
-        .transition(withCrossFade())
-        .into(binding.ivEventImage)
-      binding.tvEventName.text = event.name
-      binding.tvLocation.text = event.cityName
-      binding.tvDateDay.text = date.first
+      binding.apply {
+        ivEventImage.loadImage(event.imageLogo)
+        tvEventName.text = event.name
+        tvLocation.text = event.cityName
+        tvDateDay.text = date.first
 
-      binding.root.setOnClickListener {
-        onClick(event)
+        root.setOnClickListener {
+          onClick(event)
+        }
       }
     }
   }
