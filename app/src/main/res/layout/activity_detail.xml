@@ -58,162 +58,188 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent">
 
-      <LinearLayout
+      <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <com.waffiq.divenzz.ui.customview.AspectRatioImageView
           android:id="@+id/iv_picture"
           style="@style/roundedCornersImageView"
-          android:layout_width="match_parent"
+          android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:contentDescription="@string/event_image"
           android:scaleType="fitCenter"
+          app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
           tools:src="@color/material_dynamic_primary60" />
 
         <TextView
           android:id="@+id/tv_event_name"
-          android:layout_width="wrap_content"
+          android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_marginHorizontal="@dimen/margin"
           android:layout_marginTop="@dimen/margin"
           android:fontFamily="@font/nunito_sans_bold"
           android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/iv_picture"
           tools:text="Dicoding Event 1" />
 
-        <LinearLayout
-          android:layout_width="match_parent"
+        <TextView
+          android:id="@+id/tv_owner_name"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:orientation="horizontal">
+          android:layout_marginStart="@dimen/margin"
+          android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/tv_event_name"
+          tools:text="Dicoding Indonesia, " />
 
-          <TextView
-            android:id="@+id/tv_owner_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin"
-            android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
-            tools:text="Dicoding Indonesia, " />
-
-          <TextView
-            android:id="@+id/tv_event_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
-            tools:text="Tech-talk" />
-        </LinearLayout>
+        <TextView
+          android:id="@+id/tv_event_type"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
+          app:layout_constraintStart_toEndOf="@id/tv_owner_name"
+          app:layout_constraintTop_toTopOf="@id/tv_owner_name"
+          tools:text="Tech-talk" />
 
         <com.google.android.material.card.MaterialCardView
           android:id="@+id/layout_detail"
-          android:layout_width="match_parent"
+          android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_marginHorizontal="@dimen/margin"
           android:layout_marginTop="@dimen/margin"
           app:cardBackgroundColor="?attr/colorSurfaceContainer"
           app:cardCornerRadius="12dp"
-          app:cardElevation="0dp">
+          app:cardElevation="0dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/tv_owner_name">
 
-          <LinearLayout
+          <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin"
-            android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="@dimen/padding_card">
 
-            <!-- First Row: Date and Time -->
-            <LinearLayout
-              android:layout_width="match_parent"
+            <!-- DATE TITLE -->
+            <TextView
+              android:id="@+id/tv_date_title"
+              style="@style/DetailCardTitleItemStyle"
+              android:layout_width="0dp"
               android:layout_height="wrap_content"
-              android:baselineAligned="false"
-              android:orientation="horizontal">
+              android:text="@string/date"
+              app:layout_constraintEnd_toStartOf="@id/guideline_center"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent" />
 
-              <!-- DATE -->
-              <LinearLayout
-                style="@style/DetailCardItemLayoutStyle"
-                android:layout_marginEnd="@dimen/margin">
-
-                <TextView
-                  style="@style/DetailCardTitleItemStyle"
-                  android:text="@string/date" />
-
-                <TextView
-                  android:id="@+id/tv_date_day"
-                  style="@style/DetailCardItemStyle"
-                  tools:text="Friday, Aug 17 2025" />
-              </LinearLayout>
-
-              <!-- TIME -->
-              <LinearLayout style="@style/DetailCardItemLayoutStyle">
-
-                <TextView
-                  style="@style/DetailCardTitleItemStyle"
-                  android:text="@string/time" />
-
-                <TextView
-                  android:id="@+id/tv_time"
-                  style="@style/DetailCardItemStyle"
-                  tools:text="6:00 - 8:00 PM" />
-              </LinearLayout>
-            </LinearLayout>
-
-            <!-- Spacer -->
-            <Space
-              android:layout_width="match_parent"
-              android:layout_height="20dp" />
-
-            <!-- Second Row: Location and Quota -->
-            <LinearLayout
-              android:layout_width="match_parent"
+            <!-- DATE VALUE -->
+            <TextView
+              android:id="@+id/tv_date_day"
+              style="@style/DetailCardItemStyle"
+              android:layout_width="0dp"
               android:layout_height="wrap_content"
-              android:baselineAligned="false"
-              android:orientation="horizontal">
+              app:layout_constraintEnd_toStartOf="@id/guideline_center"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/tv_date_title"
+              tools:text="Friday, Aug 17 2025" />
 
-              <!-- LOCATION -->
-              <LinearLayout
-                style="@style/DetailCardItemLayoutStyle"
-                android:layout_marginEnd="@dimen/margin">
+            <!-- TIME TITLE -->
+            <TextView
+              android:id="@+id/tv_time_title"
+              style="@style/DetailCardTitleItemStyle"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:text="@string/time"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toEndOf="@id/guideline_center"
+              app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                  style="@style/DetailCardTitleItemStyle"
-                  android:text="@string/location" />
+            <!-- TIME VALUE -->
+            <TextView
+              android:id="@+id/tv_time"
+              style="@style/DetailCardItemStyle"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toEndOf="@id/guideline_center"
+              app:layout_constraintTop_toBottomOf="@id/tv_time_title"
+              tools:text="6:00 - 8:00 PM" />
 
-                <TextView
-                  android:id="@+id/tv_place"
-                  style="@style/DetailCardItemStyle"
-                  tools:text="Online" />
-              </LinearLayout>
+            <!-- LOCATION TITLE -->
+            <TextView
+              android:id="@+id/tv_location_title"
+              style="@style/DetailCardTitleItemStyle"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="20dp"
+              android:text="@string/location"
+              app:layout_constraintEnd_toStartOf="@id/guideline_center"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/tv_date_day" />
 
-              <!-- QUOTA -->
-              <LinearLayout style="@style/DetailCardItemLayoutStyle">
+            <!-- LOCATION VALUE -->
+            <TextView
+              android:id="@+id/tv_place"
+              style="@style/DetailCardItemStyle"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              app:layout_constraintEnd_toStartOf="@id/guideline_center"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@id/tv_location_title"
+              tools:text="Online" />
 
-                <TextView
-                  style="@style/DetailCardTitleItemStyle"
-                  android:text="@string/quota" />
+            <!-- QUOTA TITLE -->
+            <TextView
+              android:id="@+id/tv_quota_title"
+              style="@style/DetailCardTitleItemStyle"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="20dp"
+              android:text="@string/quota"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toEndOf="@id/guideline_center"
+              app:layout_constraintTop_toBottomOf="@id/tv_time" />
 
-                <TextView
-                  android:id="@+id/tv_quota"
-                  style="@style/DetailCardItemStyle"
-                  tools:text="386/1000" />
+            <!-- QUOTA VALUE -->
+            <TextView
+              android:id="@+id/tv_quota"
+              style="@style/DetailCardItemStyle"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toEndOf="@id/guideline_center"
+              app:layout_constraintTop_toBottomOf="@id/tv_quota_title"
+              tools:text="386/1000" />
 
-              </LinearLayout>
-            </LinearLayout>
-          </LinearLayout>
+            <!-- GUIDELINE for 50% split -->
+            <androidx.constraintlayout.widget.Guideline
+              android:id="@+id/guideline_center"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              app:layout_constraintGuide_percent="0.5" />
+
+          </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
           android:id="@+id/tv_description"
-          android:layout_width="match_parent"
+          android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_marginHorizontal="@dimen/margin"
           android:layout_marginTop="@dimen/margin"
           android:linksClickable="true"
           android:paddingBottom="?attr/actionBarSize"
-          android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+          android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/layout_detail" />
 
-      </LinearLayout>
+      </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
   </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
