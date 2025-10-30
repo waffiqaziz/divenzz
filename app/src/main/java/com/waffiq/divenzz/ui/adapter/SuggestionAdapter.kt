@@ -1,10 +1,10 @@
 package com.waffiq.divenzz.ui.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
 class SuggestionAdapter(
@@ -12,11 +12,10 @@ class SuggestionAdapter(
   private val onItemClick: (String) -> Unit
 ) : RecyclerView.Adapter<SuggestionAdapter.ViewHolder>() {
 
-  @SuppressLint("NotifyDataSetChanged")
-  // safe to use notifyDataSetChanged() due to small data suggestion list
   fun updateSuggestions(newItems: List<String>) {
-    items = newItems
-    notifyDataSetChanged()
+    val diffCallback = DiffCallback(this.items, newItems)
+    val diffResult = DiffUtil.calculateDiff(diffCallback)
+    diffResult.dispatchUpdatesTo(this)
   }
 
   class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -36,4 +35,20 @@ class SuggestionAdapter(
   }
 
   override fun getItemCount() = items.size
+
+  inner class DiffCallback(
+    private val oldList: List<String>,
+    private val newList: List<String>,
+  ) : DiffUtil.Callback() {
+
+    override fun getOldListSize() = oldList.size
+
+    override fun getNewListSize() = newList.size
+
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+      oldList[oldItemPosition] == newList[newItemPosition]
+
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+      oldList[oldItemPosition] == newList[newItemPosition]
+  }
 }
