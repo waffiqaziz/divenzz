@@ -14,16 +14,16 @@ import androidx.work.WorkerParameters
 import com.loopj.android.http.AsyncHttpResponseHandler
 import com.loopj.android.http.SyncHttpClient
 import com.waffiq.divenzz.BuildConfig
+import com.waffiq.divenzz.BuildConfig.BASE_URL
 import com.waffiq.divenzz.MainActivity
 import com.waffiq.divenzz.R.drawable.ic_notification_icon
-import com.waffiq.divenzz.utils.Constant.BASE_URL
 import com.waffiq.divenzz.utils.Helpers.convertToReadableDateTimeCompat
 import cz.msebera.android.httpclient.Header
 import org.json.JSONObject
 
 class DailyReminderWorker(
   context: Context,
-  workerParams: WorkerParameters
+  workerParams: WorkerParameters,
 ) : Worker(context, workerParams) {
 
   override fun doWork(): Result {
@@ -46,7 +46,7 @@ class DailyReminderWorker(
         override fun onSuccess(
           statusCode: Int,
           headers: Array<Header?>?,
-          responseBody: ByteArray
+          responseBody: ByteArray,
         ) {
           try {
             val responseString = String(responseBody)
@@ -65,8 +65,7 @@ class DailyReminderWorker(
               logDebug("Showing notification for event: $eventName")
 
               showNotification(
-                title = eventName,
-                message = "${date.first} | ${date.second}"
+                title = eventName, message = "${date.first} | ${date.second}"
               )
 
               result = Result.success()
@@ -74,8 +73,7 @@ class DailyReminderWorker(
               logDebug("No events available, showing generic notification")
 
               showNotification(
-                title = "Daily Reminder",
-                message = "Check out today's events!"
+                title = "Daily Reminder", message = "Check out today's events!"
               )
 
               result = Result.success()
@@ -86,8 +84,7 @@ class DailyReminderWorker(
           } catch (e: Exception) {
             Log.e(TAG, "Parse error: ${e.message}", e)
             showNotification(
-              title = "Error",
-              message = "Failed to parse event data"
+              title = "Error", message = "Failed to parse event data"
             )
             result = Result.failure()
           }
@@ -97,14 +94,13 @@ class DailyReminderWorker(
           statusCode: Int,
           headers: Array<Header?>?,
           responseBody: ByteArray?,
-          error: Throwable
+          error: Throwable,
         ) {
           Log.e(TAG, "API call failed: ${error.message}", error)
 
           // Show generic notification even on failure
           showNotification(
-            title = "Daily Reminder",
-            message = "Check out today's events!"
+            title = "Daily Reminder", message = "Check out today's events!"
           )
 
           result = Result.retry()
@@ -120,8 +116,7 @@ class DailyReminderWorker(
       Log.e(TAG, "Worker failed: ${e.message}", e)
 
       showNotification(
-        title = "Daily Reminder",
-        message = "Check out today's events!"
+        title = "Daily Reminder", message = "Check out today's events!"
       )
 
       Result.failure()
@@ -129,15 +124,14 @@ class DailyReminderWorker(
   }
 
   private fun showNotification(title: String, message: String) {
-    val notificationManager = applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    val notificationManager =
+      applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     val channelId = "daily_reminder_channel"
     val channelName = "Daily Reminder"
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       val channel = NotificationChannel(
-        channelId,
-        channelName,
-        NotificationManager.IMPORTANCE_DEFAULT
+        channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT
       ).apply {
         description = "Channel for daily event reminders"
       }
@@ -148,21 +142,15 @@ class DailyReminderWorker(
       flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     }
     val pendingIntent = PendingIntent.getActivity(
-      applicationContext,
-      0,
-      intent,
-      PendingIntent.FLAG_IMMUTABLE
+      applicationContext, 0, intent, PendingIntent.FLAG_IMMUTABLE
     )
 
-    val notification = NotificationCompat.Builder(applicationContext, channelId)
-      .setSmallIcon(ic_notification_icon)
-      .setContentTitle(title)
-      .setContentText(message)
-      .setStyle(NotificationCompat.BigTextStyle().bigText(message))
-      .setPriority(NotificationCompat.PRIORITY_HIGH)
-      .setContentIntent(pendingIntent)
-      .setAutoCancel(true)
-      .build()
+    val notification =
+      NotificationCompat.Builder(applicationContext, channelId).setSmallIcon(ic_notification_icon)
+        .setContentTitle(title).setContentText(message)
+        .setStyle(NotificationCompat.BigTextStyle().bigText(message))
+        .setPriority(NotificationCompat.PRIORITY_HIGH).setContentIntent(pendingIntent)
+        .setAutoCancel(true).build()
 
     notificationManager.notify(NOTIFICATION_ID, notification)
     logDebug("Notification displayed")
