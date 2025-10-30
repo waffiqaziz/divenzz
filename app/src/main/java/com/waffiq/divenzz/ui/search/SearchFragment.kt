@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
 class SearchFragment : Fragment() {
 
   private var _binding: FragmentSearchBinding? = null
-  private val binding get() = _binding!!
+  private val binding get() = _binding ?: error("FragmentSearchBinding is null")
 
   private lateinit var viewModel: SearchViewModel
 
@@ -141,46 +141,56 @@ class SearchFragment : Fragment() {
     viewModel.uiState.observe(viewLifecycleOwner) { state ->
       when (state) {
         is SearchUiState.Initial -> {
-          binding.progressIndicator.isVisible = false
-          binding.searchTextContainer.isVisible = true
-          binding.rvSearchResults.isVisible = false
-          binding.emptyState.root.isVisible = false
-          binding.error.root.isVisible = false
+          binding.apply {
+            progressIndicator.isVisible = false
+            searchTextContainer.isVisible = true
+            rvSearchResults.isVisible = false
+            emptyState.root.isVisible = false
+            error.root.isVisible = false
+          }
         }
 
         is SearchUiState.Loading -> {
-          binding.progressIndicator.isVisible = true
-          binding.searchTextContainer.isVisible = false
-          binding.rvSearchResults.isVisible = false
-          binding.emptyState.root.isVisible = false
-          binding.error.root.isVisible = false
+          binding.apply {
+            progressIndicator.isVisible = true
+            searchTextContainer.isVisible = false
+            rvSearchResults.isVisible = false
+            emptyState.root.isVisible = false
+            error.root.isVisible = false
+          }
         }
 
         is SearchUiState.Success -> {
-          binding.progressIndicator.isVisible = false
-          binding.searchTextContainer.isVisible = false
-          binding.rvSearchResults.isVisible = true
-          binding.emptyState.root.isVisible = false
-          binding.error.root.isVisible = false
+          binding.apply {
+            progressIndicator.isVisible = false
+            searchTextContainer.isVisible = false
+            rvSearchResults.isVisible = true
+            emptyState.root.isVisible = false
+            error.root.isVisible = false
+          }
           eventAdapter.setEvent(state.events)
         }
 
         is SearchUiState.Empty -> {
-          binding.progressIndicator.isVisible = false
-          binding.searchTextContainer.isVisible = false
-          binding.rvSearchResults.isVisible = false
-          binding.emptyState.root.isVisible = true
-          binding.error.root.isVisible = false
-          binding.emptyState.tvEmptyStateDescription.text =
-            getString(no_results_found_for, state.query)
+          binding.apply {
+            progressIndicator.isVisible = false
+            searchTextContainer.isVisible = false
+            rvSearchResults.isVisible = false
+            emptyState.root.isVisible = true
+            error.root.isVisible = false
+            emptyState.tvEmptyStateDescription.text =
+              getString(no_results_found_for, state.query)
+          }
         }
 
         is SearchUiState.Error -> {
-          binding.progressIndicator.isVisible = false
-          binding.searchTextContainer.isVisible = false
-          binding.rvSearchResults.isVisible = false
-          binding.emptyState.root.isVisible = false
-          binding.error.root.isVisible = true
+          binding.apply {
+            progressIndicator.isVisible = false
+            searchTextContainer.isVisible = false
+            rvSearchResults.isVisible = false
+            emptyState.root.isVisible = false
+            error.root.isVisible = true
+          }
         }
       }
     }
@@ -198,9 +208,11 @@ class SearchFragment : Fragment() {
   }
 
   private fun performSearch(query: String) {
-    binding.emptyState.root.isVisible = false
-    binding.rvSearchResults.isVisible = false
-    binding.searchBar.textView.text = query
+    binding.apply {
+      emptyState.root.isVisible = false
+      rvSearchResults.isVisible = false
+      searchBar.textView.text = query
+    }
 
     viewModel.search(query)
   }
@@ -225,14 +237,16 @@ class SearchFragment : Fragment() {
   }
 
   fun openSearchView() {
-    binding.searchView.show()
+    binding.apply {
+      searchView.show()
 
-    binding.searchView.editText.requestFocus()
-    binding.searchView.editText.postDelayed({
-      val imm =
-        requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-      imm.showSoftInput(binding.searchView.editText, InputMethodManager.SHOW_IMPLICIT)
-    }, 100)
+      searchView.editText.requestFocus()
+      searchView.editText.postDelayed({
+        val imm =
+          requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(searchView.editText, InputMethodManager.SHOW_IMPLICIT)
+      }, 100)
+    }
   }
 
   override fun onDestroyView() {

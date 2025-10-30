@@ -19,9 +19,9 @@ import com.waffiq.divenzz.utils.Helpers.openDetailPage
 class PastEventFragment : Fragment() {
 
   private var _binding: FragmentPastEventBinding? = null
-  private val binding get() = _binding!!
+  private val binding get() = _binding ?: error("FragmentPastEventBinding is null")
 
-  private lateinit var viewModel : PastEventViewModel
+  private lateinit var viewModel: PastEventViewModel
 
   private lateinit var eventAdapter: EventAdapter
 
@@ -58,29 +58,37 @@ class PastEventFragment : Fragment() {
     viewModel.uiState.observe(viewLifecycleOwner) { state ->
       when (state) {
         is EventUiState.Loading -> {
-          binding.loading.progressCircular.isVisible = true
-          binding.error.root.isVisible = false
-          binding.rvEvents.isVisible = false
+          binding.apply {
+            loading.progressCircular.isVisible = true
+            error.root.isVisible = false
+            rvEvents.isVisible = false
+          }
         }
 
         is EventUiState.Success -> {
-          binding.loading.progressCircular.isVisible = false
-          binding.error.root.isVisible = false
-          binding.rvEvents.isVisible = true
+          binding.apply {
+            loading.progressCircular.isVisible = false
+            error.root.isVisible = false
+            rvEvents.isVisible = true
+          }
           eventAdapter.setEvent(state.events)
         }
 
         is EventUiState.Error -> {
-          binding.loading.progressCircular.isVisible = false
-          binding.error.root.isVisible = true
-          binding.rvEvents.isVisible = false
+          binding.apply {
+            loading.progressCircular.isVisible = false
+            error.root.isVisible = true
+            rvEvents.isVisible = false
+          }
         }
 
         is EventUiState.Empty -> {
-          binding.loading.progressCircular.isVisible = false
-          binding.error.root.isVisible = true
-          binding.rvEvents.isVisible = false
-          binding.error.tvErrorMessage.text = getString(no_past_events_found)
+          binding.apply {
+            loading.progressCircular.isVisible = false
+            error.root.isVisible = true
+            rvEvents.isVisible = false
+            error.tvErrorMessage.text = getString(no_past_events_found)
+          }
         }
       }
     }

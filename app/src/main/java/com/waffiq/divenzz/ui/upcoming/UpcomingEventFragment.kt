@@ -19,9 +19,9 @@ import com.waffiq.divenzz.utils.Helpers.openDetailPage
 class UpcomingEventFragment : Fragment() {
 
   private var _binding: FragmentUpcomingEventBinding? = null
-  private val binding get() = _binding!!
+  private val binding get() = _binding ?: error("FragmentUpcomingEventBinding is null")
 
-  private lateinit var viewModel : UpcomingEventViewModel
+  private lateinit var viewModel: UpcomingEventViewModel
 
   private lateinit var eventAdapter: EventAdapter
 
@@ -58,29 +58,37 @@ class UpcomingEventFragment : Fragment() {
     viewModel.uiState.observe(viewLifecycleOwner) { state ->
       when (state) {
         is EventUiState.Loading -> {
-          binding.loading.progressCircular.isVisible = true
-          binding.error.root.isVisible = false
-          binding.rvEvents.isVisible = false
+          binding.apply {
+            loading.progressCircular.isVisible = true
+            error.root.isVisible = false
+            rvEvents.isVisible = false
+          }
         }
 
         is EventUiState.Success -> {
-          binding.loading.progressCircular.isVisible = false
-          binding.error.root.isVisible = false
-          binding.rvEvents.isVisible = true
+          binding.apply {
+            loading.progressCircular.isVisible = false
+            error.root.isVisible = false
+            rvEvents.isVisible = true
+          }
           eventAdapter.setEvent(state.events)
         }
 
         is EventUiState.Error -> {
-          binding.loading.progressCircular.isVisible = false
-          binding.error.root.isVisible = true
-          binding.rvEvents.isVisible = false
+          binding.apply {
+            loading.progressCircular.isVisible = false
+            error.root.isVisible = true
+            rvEvents.isVisible = false
+          }
         }
 
         is EventUiState.Empty -> {
-          binding.loading.progressCircular.isVisible = false
-          binding.error.root.isVisible = true
-          binding.rvEvents.isVisible = false
-          binding.error.tvErrorMessage.text = getString(no_upcoming_event_found)
+          binding.apply {
+            loading.progressCircular.isVisible = false
+            error.root.isVisible = true
+            rvEvents.isVisible = false
+            error.tvErrorMessage.text = getString(no_upcoming_event_found)
+          }
         }
       }
     }

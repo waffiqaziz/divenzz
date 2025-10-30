@@ -4,12 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
-import com.waffiq.divenzz.R.drawable.ic_image_error_wide
-import com.waffiq.divenzz.R.drawable.ic_image_placeholder
 import com.waffiq.divenzz.core.data.remote.response.EventResponse
 import com.waffiq.divenzz.databinding.ItemEventBinding
+import com.waffiq.divenzz.utils.Helpers.loadImage
 
 class EventAdapter(
   private val onClick: (EventResponse) -> Unit,
@@ -36,12 +33,7 @@ class EventAdapter(
     RecyclerView.ViewHolder(binding.root) {
 
     fun onBind(event: EventResponse) {
-      Glide.with(binding.root.context)
-        .load(event.mediaCover)
-        .placeholder(ic_image_placeholder)
-        .error(ic_image_error_wide)
-        .transition(withCrossFade())
-        .into(binding.ivPicture)
+      binding.ivPicture.loadImage(event.mediaCover)
       binding.tvEventName.text = event.name
 
       binding.root.setOnClickListener {
