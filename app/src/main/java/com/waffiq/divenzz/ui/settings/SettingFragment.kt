@@ -210,11 +210,10 @@ class SettingFragment : Fragment() {
   }
 
   private fun clearButtonHighlights() {
-    val defaultColor = Color.TRANSPARENT // or your default button color
     binding.apply {
-      btnSystem.setBackgroundColor(defaultColor)
-      btnLight.setBackgroundColor(defaultColor)
-      btnDark.setBackgroundColor(defaultColor)
+      btnSystem.setBackgroundColor(Color.TRANSPARENT)
+      btnLight.setBackgroundColor(Color.TRANSPARENT)
+      btnDark.setBackgroundColor(Color.TRANSPARENT)
     }
   }
 
