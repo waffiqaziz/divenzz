@@ -236,7 +236,7 @@ class SearchFragment : Fragment() {
     }
   }
 
-  fun openSearchView() {
+  private fun openSearchView() {
     binding.apply {
       searchView.show()
 
