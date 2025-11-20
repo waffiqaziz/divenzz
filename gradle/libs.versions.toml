@@ -26,7 +26,7 @@ lifecycleLivedataKtx = "2.9.4"
 lifecycleViewmodelKtx = "2.10.0"
 navigationFragmentKtx = "2.9.6"
 navigationUiKtx = "2.9.6"
-swiperefreshlayout = "1.2.0-beta01"
+swiperefreshlayout = "1.2.0-rc01"
 workRuntimeKtx = "2.11.0"
 androidAsyncHttp = "1.4.11"
 
