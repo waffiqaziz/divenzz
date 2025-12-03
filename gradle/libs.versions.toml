@@ -40,7 +40,7 @@ okhttp = "5.3.2"
 
 # Image Loading
 glide = "5.0.5"
-activity = "1.12.0"
+activity = "1.12.1"
 
 markwon = "4.6.2"
 
