@@ -9,8 +9,7 @@ versionCode = "1"
 versionName = "1.0.0-dev"
 
 # Plugin Versions
-agp = "8.13.2"
-kotlin = "2.3.0"
+agp = "9.0.0"
 coreKtx = "1.17.0"
 ksp = "2.3.4"
 
@@ -86,7 +85,6 @@ androidx-room-compiler = { group = "androidx.room", name = "room-compiler", vers
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 [bundles]
