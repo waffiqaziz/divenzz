@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
   alias(libs.plugins.android.application)
-  alias(libs.plugins.kotlin.android)
   alias(libs.plugins.ksp)
 }
 
@@ -36,13 +35,14 @@ android {
     viewBinding = true
     buildConfig = true
   }
-  kotlin {
-    compilerOptions {
-      jvmTarget = JvmTarget.JVM_21
+}
 
-      // https://youtrack.jetbrains.com/issue/KT-73255/Change-defaulting-rule-for-annotations#focus=Comments-27-11972724.0-0
-      freeCompilerArgs.add("-Xannotation-default-target=param-property")
-    }
+kotlin {
+  compilerOptions {
+    jvmTarget = JvmTarget.JVM_21
+
+    // https://youtrack.jetbrains.com/issue/KT-73255/Change-defaulting-rule-for-annotations#focus=Comments-27-11972724.0-0
+    freeCompilerArgs.add("-Xannotation-default-target=param-property")
   }
 }
 
