@@ -29,7 +29,7 @@ swiperefreshlayout = "1.2.0"
 workRuntimeKtx = "2.11.1"
 androidAsyncHttp = "1.4.11"
 
-datastore = "1.2.0"
+datastore = "1.2.1"
 room = "2.8.4"
 
 # Networking
