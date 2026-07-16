@@ -1,7 +1,7 @@
 [versions]
 # SDK Versions
-targetSdk = "36"
-compileSdk = "36"
+targetSdk = "37"
+compileSdk = "37"
 minSdk = "24"
 
 # App Version
