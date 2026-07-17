@@ -38,7 +38,7 @@ moshi = "1.15.2"
 okhttp = "5.4.0"
 
 # Image Loading
-glide = "5.0.7"
+glide = "5.0.9"
 activity = "1.13.0"
 
 markwon = "4.6.2"
