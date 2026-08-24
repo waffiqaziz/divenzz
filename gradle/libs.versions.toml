@@ -9,7 +9,7 @@ versionCode = "1"
 versionName = "1.0.0-dev"
 
 # Plugin Versions
-agp = "9.3.1"
+agp = "9.3.2"
 coreKtx = "1.19.0"
 ksp = "2.3.11"
 
