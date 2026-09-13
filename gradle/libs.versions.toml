@@ -30,7 +30,7 @@ workRuntimeKtx = "2.11.2"
 androidAsyncHttp = "1.4.11"
 
 datastore = "1.2.1"
-room = "2.8.4"
+room = "2.8.5"
 
 # Networking
 retrofit = "3.0.0"
